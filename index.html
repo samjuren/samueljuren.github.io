@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Samuel Simões Juren da Costa | Currículo</title>
@@ -32,6 +33,7 @@
     }
 
     body {
+  font-family: 'Inter', sans-serif;
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
@@ -177,11 +179,28 @@
   border-radius: 4px;
   cursor: pointer;
 }
+.highlight {
+  color: var(--hover-color);
+}
+.btn-download {
+  display: inline-block;
+  margin-top: 20px;
+  background-color: var(--hover-color);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.card {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
 </style>
 </head>
 <body>
   <header>
-    <h1>Samuel Simões Juren da Costa</h1>
+    <h1><span class="highlight">$1</span> Simões Juren da Costa</h1>
     <p>Desenvolvedor Mobile | sammjureen@outlook.com | (11) 99542-2920</p>
     <p><a href="https://github.com/sammjureen" target="_blank" style="color:#ccc">GitHub</a> | <a href="https://linkedin.com/in/sammjureen" target="_blank" style="color:#ccc">LinkedIn</a></p>
     <button class="theme-toggle" onclick="toggleTheme()">🌗 Alternar Tema</button>
@@ -319,7 +338,7 @@
 
     <section class="fade-in">
       <h2>Contato</h2>
-      <form>
+      <form onsubmit="event.preventDefault(); alert('Mensagem enviada com sucesso!'); this.reset();">
         <input type="text" placeholder="Seu nome" required>
         <input type="email" placeholder="Seu e-mail" required>
         <textarea placeholder="Sua mensagem" rows="4" required></textarea>
@@ -330,6 +349,7 @@
 
   <footer>
     &copy; 2025 Samuel Simões Juren da Costa. Todos os direitos reservados.
+  <a href="Samuel_Simoes_CV.pdf" download class="btn-download">⬇️ Baixar Currículo em PDF</a>
   </footer>
 
   <script>

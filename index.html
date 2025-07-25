@@ -4,7 +4,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Samuel Simões Juren da Costa | Currículo</title>
+  <title>Samuel - Currículo</title>
   <style>
     :root {
       --bg-color: #f9f9f9;
@@ -53,16 +53,17 @@
       margin: 0;
     }
     .theme-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: transparent;
-      color: var(--header-text);
-      border: 2px solid var(--header-text);
-      padding: 6px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  color: var(--header-text);
+  border: 2px solid var(--header-text);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1000;
+}
     .container {
       max-width: 1000px;
       margin: 40px auto;
@@ -202,7 +203,7 @@
 <body>
   <header>
     <h1>Samuel Simões Juren da Costa</h1>
-    <p>Desenvolvedor Mobile | sammjureen@outlook.com | (11) 99542-2920</p>
+    <p>Desenvolvedor Fullstack & Mobile | sammjureen@outlook.com | (11) 99542-2920</p>
     <p><a href="https://github.com/sammjureen" target="_blank" style="color:#ccc">GitHub</a> | <a href="https://linkedin.com/in/sammjureen" target="_blank" style="color:#ccc">LinkedIn</a></p>
     <button class="theme-toggle" onclick="toggleTheme()">🌗 Alternar Tema</button>
   </header>

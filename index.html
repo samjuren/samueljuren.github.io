@@ -152,7 +152,32 @@
       font-size: 14px;
       color: var(--footer-text);
     }
-  </style>
+  .carousel {
+  position: relative;
+  overflow: hidden;
+}
+.carousel img {
+  display: none;
+  width: 100%;
+  border-radius: 6px;
+}
+.carousel img.active {
+  display: block;
+}
+.carousel::after {
+  content: '▶';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+</style>
 </head>
 <body>
   <header>
@@ -208,20 +233,26 @@
       <h2>Projetos em Destaque</h2>
       <div class="card-grid">
         <div class="card">
-  <img src="onetvision1.jpeg" alt="Onet Vision tela login">
-  <img src="onetvision2.jpeg" alt="Onet Vision tela de aprovação de serviço">
+  <div class="carousel">
+    <img src="onetvision1.jpeg" alt="Onet Vision tela login" class="active">
+    <img src="onetvision2.jpeg" alt="Onet Vision tela de aprovação de serviço">
+  </div>
   <h3>Onet Vision</h3>
           <p>App de gerenciamento de limpeza para grandes empresas. Desenvolvido em .NET MAUI com reconhecimento facial e integração com Azure.</p>
         </div>
         <div class="card">
-  <img src="pesados1.jpeg" alt="Pesados Online tela login">
-  <img src="pesados2.jpeg" alt="Pesados Online tela de laudo e status da máquina">
+  <div class="carousel">
+    <img src="pesados1.jpeg" alt="Pesados Online tela login" class="active">
+    <img src="pesados2.jpeg" alt="Pesados Online tela de laudo e status da máquina">
+  </div>
   <h3>Pesados Online</h3>
           <p>Aplicativo para compra e cadastro de máquinas pesadas. Correção de bugs, melhorias de layout e lógica de negócios. Feito em .NET MAUI.</p>
         </div>
         <div class="card">
-  <img src="sab1.jpeg" alt="SAB Cliente e Técnico tela de boas-vindas">
-  <img src="sab2.jpeg" alt="SAB Cliente e Técnico dashboard de ferramentas">
+  <div class="carousel">
+    <img src="sab1.jpeg" alt="SAB Cliente e Técnico tela de boas-vindas" class="active">
+    <img src="sab2.jpeg" alt="SAB Cliente e Técnico dashboard de ferramentas">
+  </div>
   <h3>SAB Cliente & Técnico</h3>
           <p>App de relatórios de atendimento técnico, com foco em layout e performance no iOS. Publicado na App Store. Desenvolvido em .NET MAUI.</p>
         </div>
@@ -259,6 +290,15 @@
     document.querySelectorAll('.fade-in').forEach(section => {
       observer.observe(section);
     });
-  </script>
+  document.querySelectorAll('.carousel').forEach(carousel => {
+  const images = carousel.querySelectorAll('img');
+  let index = 0;
+  carousel.addEventListener('click', () => {
+    images[index].classList.remove('active');
+    index = (index + 1) % images.length;
+    images[index].classList.add('active');
+  });
+});
+</script>
 </body>
 </html>

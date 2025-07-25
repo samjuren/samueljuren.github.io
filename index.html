@@ -1,39 +1,181 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Meu Currículo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Samuel Simões Juren da Costa | Currículo</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
-    h1 { color: #4A4A4A; }
-    h2 { border-bottom: 1px solid #ccc; padding-bottom: 5px; }
-    ul { list-style: none; padding-left: 0; }
+    :root {
+      --bg-color: #f9f9f9;
+      --text-color: #333;
+      --header-bg: #4a4a4a;
+      --header-text: #fff;
+      --card-bg: #fff;
+      --footer-text: #888;
+    }
+
+    body.dark-mode {
+      --bg-color: #1f1f1f;
+      --text-color: #f0f0f0;
+      --header-bg: #333;
+      --header-text: #fff;
+      --card-bg: #2a2a2a;
+      --footer-text: #aaa;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
+    }
+    header {
+      background-color: var(--header-bg);
+      color: var(--header-text);
+      padding: 30px 20px;
+      text-align: center;
+      position: relative;
+    }
+    header h1 {
+      margin: 0;
+    }
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      color: var(--header-text);
+      border: 2px solid var(--header-text);
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    h2 {
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+    ul.skills {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    ul.skills li {
+      background-color: #e1e1e1;
+      border-radius: 6px;
+      padding: 6px 12px;
+      margin: 5px;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .card h3 {
+      margin-top: 0;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: var(--footer-text);
+    }
   </style>
 </head>
 <body>
-  <h1>Seu Nome</h1>
-  <p>Email: seuemail@email.com | GitHub: github.com/seunome</p>
+  <header>
+    <h1>Samuel Simões Juren da Costa</h1>
+    <p>Desenvolvedor Mobile | sammjureen@outlook.com | (11) 99542-2920</p>
+    <p><a href="https://github.com/sammjureen" target="_blank" style="color:#ccc">GitHub</a> | <a href="https://linkedin.com/in/sammjureen" target="_blank" style="color:#ccc">LinkedIn</a></p>
+    <button class="theme-toggle" onclick="toggleTheme()">🌗 Alternar Tema</button>
+  </header>
 
-  <h2>Resumo</h2>
-  <p>Desenvolvedor Web apaixonado por criar soluções eficientes e bem projetadas.</p>
+  <div class="container">
+    <section>
+      <h2>Resumo</h2>
+      <p>Especialista em Desenvolvimento Mobile com foco em .NET MAUI e React Native. Domínio avançado de C# e TypeScript, com experiência em integração de APIs REST, Firebase, SignalR, e publicação de aplicativos nas lojas. Apaixonado por performance, UI/UX e código reutilizável.</p>
+    </section>
 
-  <h2>Experiência</h2>
-  <ul>
-    <li><strong>Empresa X</strong> – Desenvolvedor Front-end (2022–Presente)</li>
-    <li><strong>Empresa Y</strong> – Estagiário em TI (2021–2022)</li>
-  </ul>
+    <section>
+      <h2>Habilidades</h2>
+      <ul class="skills">
+        <li>.NET MAUI</li>
+        <li>React Native</li>
+        <li>C#</li>
+        <li>TypeScript</li>
+        <li>XAML</li>
+        <li>MVVM</li>
+        <li>REST APIs</li>
+        <li>SQL Server</li>
+        <li>PostgreSQL</li>
+        <li>Firebase</li>
+        <li>SignalR</li>
+        <li>Entity Framework</li>
+        <li>Azure DevOps</li>
+      </ul>
+    </section>
 
-  <h2>Formação</h2>
-  <ul>
-    <li>Bacharel em Ciência da Computação – Universidade ABC (2018–2022)</li>
-  </ul>
+    <section>
+      <h2>Experiência Profissional</h2>
+      <p><strong>Programador .NET MAUI Pleno</strong> – Onet Brasil (jun/2024 – atual)<br>
+      Modernização de app usado por GRU Airport, Aeroporto de Congonhas e Hospital das Clínicas. Reconhecimento facial com Azure, notificações com Firebase e APIs com ASP.NET Core.</p>
 
-  <h2>Habilidades</h2>
-  <ul>
-    <li>HTML, CSS, JavaScript</li>
-    <li>React, Node.js</li>
-    <li>Git, GitHub</li>
-  </ul>
+      <p><strong>Programador Multiplataforma Júnior</strong> – Input Center (fev/2024 – jun/2024)<br>
+      Criação de APIs REST, migração de Xamarin para .NET MAUI, desenvolvimento de layouts, onboarding interno e publicação de apps.</p>
+
+      <p><strong>Programador Multiplataforma Trainee</strong> – Input Center (mar/2023 – fev/2024)<br>
+      Atuação em sistemas de hospitais, escolas e federação de hipismo. Desenvolvimento com Xamarin, ASP.NET e banco de dados.</p>
+    </section>
+
+    <section>
+      <h2>Formação</h2>
+      <p>Análise e Desenvolvimento de Sistemas – UNIP</p>
+    </section>
+
+    <section>
+      <h2>Projetos em Destaque</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Onet Vision</h3>
+          <p>App de gerenciamento de limpeza para grandes empresas. Desenvolvido em .NET MAUI com reconhecimento facial e integração com Azure.</p>
+        </div>
+        <div class="card">
+          <h3>Pesados Online</h3>
+          <p>Aplicativo para compra e cadastro de máquinas pesadas. Correção de bugs, melhorias de layout e lógica de negócios. Feito em .NET MAUI.</p>
+        </div>
+        <div class="card">
+          <h3>SAB Cliente & Técnico</h3>
+          <p>App de relatórios de atendimento técnico, com foco em layout e performance no iOS. Publicado na App Store. Desenvolvido em .NET MAUI.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    &copy; 2025 Samuel Simões Juren da Costa. Todos os direitos reservados.
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark-mode');
+    }
+  </script>
 </body>
 </html>

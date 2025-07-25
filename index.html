@@ -12,6 +12,8 @@
       --header-text: #fff;
       --card-bg: #fff;
       --footer-text: #888;
+      --hover-color: #7c3aed;
+      --skill-hover: #c4b5fd;
     }
 
     body.dark-mode {
@@ -21,6 +23,8 @@
       --header-text: #fff;
       --card-bg: #2a2a2a;
       --footer-text: #aaa;
+      --hover-color: #a78bfa;
+      --skill-hover: #6d28d9;
     }
 
     body {
@@ -76,6 +80,12 @@
       border-radius: 6px;
       padding: 6px 12px;
       margin: 5px;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    ul.skills li:hover {
+      background-color: var(--skill-hover);
+      color: white;
+      transform: scale(1.05);
     }
     .card-grid {
       display: grid;
@@ -87,6 +97,12 @@
       border-radius: 8px;
       padding: 20px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s, border-left 0.3s;
+      border-left: 5px solid transparent;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      border-left: 5px solid var(--hover-color);
     }
     .card h3 {
       margin-top: 0;

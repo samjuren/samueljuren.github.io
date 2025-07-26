@@ -81,42 +81,6 @@
         padding-bottom: 8px;
         margin-bottom: 20px;
       }
-      ul.skills {
-        list-style: none;
-        padding: 0;
-        display: flex;
-        flex-wrap: wrap;
-      }
-      ul.skills li {
-        background-color: var(--card-bg);
-        color: var(--text-color);
-        border-radius: 6px;
-        padding: 6px 12px;
-        margin: 5px;
-        transition: background-color 0.3s, transform 0.3s;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
-      ul.skills li:hover {
-        background-color: var(--skill-hover);
-        color: white;
-        transform: scale(1.05);
-      }
-      .fade-in {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-      }
-      .fade-in.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .card-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 20px;
-      }
       .card {
         background: var(--card-bg);
         border-radius: 8px;
@@ -137,58 +101,32 @@
         border-radius: 6px;
         margin-bottom: 10px;
       }
-      form {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
       }
-      input,
-      textarea,
-      button {
-        padding: 10px;
-        border-radius: 4px;
-        border: 1px solid #ccc;
-        font-size: 1rem;
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
       }
-      button {
-        background-color: var(--hover-color);
-        color: white;
-        border: none;
-        cursor: pointer;
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .web-project img {
+        max-height: 400px;
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
       }
       footer {
         text-align: center;
         padding: 20px;
         font-size: 14px;
         color: var(--footer-text);
-      }
-      .carousel {
-        position: relative;
-        overflow: hidden;
-      }
-      .carousel img {
-        display: none;
-        width: 100%;
-        border-radius: 6px;
-      }
-      .carousel img.active {
-        display: block;
-      }
-      .carousel::after {
-        content: "▶";
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 1.5rem;
-        background: rgba(0, 0, 0, 0.5);
-        color: white;
-        padding: 4px 8px;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-      .highlight {
-        color: var(--hover-color);
       }
       .btn-download {
         display: inline-block;
@@ -200,9 +138,6 @@
         text-decoration: none;
         font-weight: bold;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      }
-      .card {
-        border: 1px solid rgba(0, 0, 0, 0.05);
       }
     </style>
   </head>
@@ -235,257 +170,30 @@
 
     <div class="container">
       <section class="fade-in">
-        <h2>Resumo</h2>
-        <div class="card">
+        <h2>Projetos Web</h2>
+        <div class="card web-project">
+          <div class="carousel">
+            <img
+              src="sitedigitalchecklist1.png"
+              alt="Digital Checklist login"
+              class="active"
+            />
+            <img
+              src="sitedigitalchecklist2.png"
+              alt="Digital Checklist dashboard"
+            />
+          </div>
+          <h3>Checklist Digital – Onet</h3>
           <p>
-            <strong>🚀 Desenvolvedor Mobile & Fullstack</strong> com sólida
-            experiência em .NET MAUI, React Native e integração com APIs
-            modernas.
-          </p>
-          <p>
-            Trabalho com excelência em C# e TypeScript, construindo apps, sites
-            e APIs performáticos com foco em escalabilidade, reusabilidade de
-            código e design centrado no usuário.
-          </p>
-          <p>
-            Tenho vivência prática na publicação de apps, componentização,
-            arquitetura MVVM, integração com Firebase, SignalR e bancos
-            relacionais (SQL Server e PostgreSQL) e NoSQL.
-          </p>
-          <p>
-            Sou movido por inovação, UI/UX de alto padrão e boas práticas de
-            engenharia de software. 👨‍💻✨
-          </p>
-          <p>
-            Atualmente, evoluo minha atuação como Desenvolvedor Fullstack com
-            foco em tecnologias Web modernas, como React, GraphQL, SSR e CMS
-            Headless.
+            Participei da sustentação do sistema web
+            <strong>Checklist Digital</strong>, desenvolvido em
+            <strong>ASP.NET Core MVC</strong>, com foco em melhorias visuais,
+            correções de bugs, ajustes em regras de negócio e evolução de
+            funcionalidades. Trabalhei em contato direto com usuários e
+            stakeholders para garantir estabilidade e usabilidade da plataforma.
           </p>
         </div>
       </section>
-
-      <section class="fade-in">
-        <h2>Habilidades</h2>
-        <ul class="skills">
-          <li>🧩 JavaScript</li>
-          <li>⚛️ React</li>
-          <li>⚙️ Node.js</li>
-          <li>🌐 GraphQL</li>
-          <li>🔗 REST APIs</li>
-          <li>🗃️ PostgreSQL</li>
-          <li>🛢️ MySQL</li>
-          <li>🍃 MongoDB</li>
-          <li>📰 Strapi</li>
-          <li>🔧 WordPress Headless</li>
-          <li>🚀 SSR (Server-Side Rendering)</li>
-          <li>🔍 SEO Técnico</li>
-          <li>🧪 Jest</li>
-          <li>🧭 Cypress</li>
-          <li>📱 .NET MAUI</li>
-          <li>⚛️ React Native</li>
-          <li>💻 C#</li>
-          <li>🔡 TypeScript</li>
-          <li>🧩 XAML</li>
-          <li>📐 MVVM</li>
-          <li>🌐 REST APIs</li>
-          <li>🗃️ SQL Server</li>
-          <li>🐘 PostgreSQL</li>
-          <li>🔥 Firebase</li>
-          <li>📡 SignalR</li>
-          <li>🔧 Entity Framework</li>
-          <li>🚀 Azure DevOps</li>
-        </ul>
-      </section>
-
-      <section class="fade-in">
-        <h2>Experiência Profissional</h2>
-        <div class="card-grid">
-          <div class="card">
-            <h3>Desenvolvedor Fullstack & Mobile Pleno</h3>
-            <p><strong>Empresa:</strong> Onet Brasil</p>
-            <p><strong>Período:</strong> jun/2024 – atual</p>
-            <ul>
-              <li>
-                Modernização do app usado por GRU Airport, Congonhas e Hospital
-                das Clínicas
-              </li>
-              <li>
-                Reconhecimento facial com Azure e notificações push com Firebase
-              </li>
-              <li>
-                Criação de APIs em ASP.NET Core e uso de Blazor/.NET MAUI para
-                front-end
-              </li>
-              <li>
-                Sustentação no site web DigitalCheckList, ASP NET Core MVC,
-                HTML, CSS e JavaScript
-              </li>
-              <li>
-                Uso de Azure DevOps, Kanban e foco em performance e legibilidade
-                de código
-              </li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Desenvolvedor Multiplataforma Júnior</h3>
-            <p><strong>Empresa:</strong> Input Center</p>
-            <p><strong>Período:</strong> fev/2024 – jun/2024</p>
-            <ul>
-              <li>Criação de APIs REST com ASP.NET Core e automações SQL</li>
-              <li>Publicação de apps nas lojas (Google Play e App Store)</li>
-              <li>
-                Onboarding técnico: desenvolvimento de portal interno em Web
-                Forms
-              </li>
-              <li>
-                Desenvolvimento com Xamarin, .NET MAUI, HTML, CSS, JavaScript e
-                C#
-              </li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Desenvolvedor Multiplataforma Trainee</h3>
-            <p><strong>Empresa:</strong> Input Center</p>
-            <p><strong>Período:</strong> mar/2023 – fev/2024</p>
-            <ul>
-              <li>
-                Criação e manutenção de sistemas para hospitais, escolas e
-                federação de hipismo
-              </li>
-              <li>
-                Uso de Xamarin.Forms, ASP.NET Core MVC, Web Forms e Clarion
-              </li>
-              <li>
-                Desenvolvimento completo de APIs com OpenAPI, Entity Framework e
-                Swagger
-              </li>
-              <li>Otimização de queries e procedures em SQL Server</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="fade-in">
-        <h2>Formação</h2>
-        <div class="card">
-          <h3>Análise e Desenvolvimento de Sistemas – UNIP</h3>
-          <ul style="line-height: 1.6; padding-left: 20px">
-            <li>
-              🧠 Programação Orientada a Objetos (POO) com foco em projetos
-              aplicados e tópicos avançados
-            </li>
-            <li>
-              📐 Engenharia de Software: processos, modelagem, testes e
-              qualidade
-            </li>
-            <li>
-              🌐 Desenvolvimento para Internet e projeto de interfaces com o
-              usuário (UI/UX)
-            </li>
-            <li>💾 Banco de Dados: modelagem, SQL e administração</li>
-            <li>
-              📊 Gerenciamento de Projetos de Software com visão estratégica e
-              boas práticas
-            </li>
-            <li>
-              🖧 Redes de Computadores, Sistemas Operacionais e Organização de
-              Computadores
-            </li>
-            <li>
-              📈 Estatística, Lógica e Matemática para Computação como base para
-              raciocínio computacional
-            </li>
-            <li>
-              🌱 Projetos interdisciplinares e apoio em ética, metodologia
-              científica, empreendedorismo e comunicação
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="fade-in">
-        <h2>Projetos em Destaque</h2>
-        <div class="card-grid">
-          <div class="card">
-            <div class="carousel">
-              <img
-                src="onetvision1.jpeg"
-                alt="Onet Vision tela login"
-                class="active"
-              />
-              <img
-                src="onetvision2.jpeg"
-                alt="Onet Vision tela de aprovação de serviço"
-              />
-            </div>
-            <h3>Onet Vision</h3>
-            <p>
-              App de gerenciamento de limpeza desenvolvido do zero de forma, com
-              foco em grandes operações. Criado integralmente em .NET MAUI, com
-              API em ASP NET Core .NET 8 com recursos de reconhecimento facial e
-              integração com serviços Azure. Utilzando SignalR para comunicação
-              em tempo real, Firebase para notificações push e Azure DevOps para
-              CI/CD. O app é usado por mais de 3.000 usuários diariamente, com
-              foco em performance e usabilidade.
-            </p>
-          </div>
-          <div class="card">
-            <div class="carousel">
-              <img
-                src="pesados1.jpeg"
-                alt="Pesados Online tela login"
-                class="active"
-              />
-              <img
-                src="pesados2.jpeg"
-                alt="Pesados Online tela de laudo e status da máquina"
-              />
-            </div>
-            <h3>Pesados Online</h3>
-            <p>
-              Aplicativo para compra e cadastro de máquinas pesadas. Atuei na
-              sustentação do projeto, realizando correções de bugs, melhorias de
-              layout e ajustes em regras de negócio. Durante esse processo,
-              aprofundei conhecimentos em manutenção de código legado, depuração
-              e colaboração com stakeholders. Feito em .NET MAUI.
-            </p>
-          </div>
-          <div class="card">
-            <div class="carousel">
-              <img
-                src="sab1.jpeg"
-                alt="SAB Cliente e Técnico tela de boas-vindas"
-                class="active"
-              />
-              <img
-                src="sab2.jpeg"
-                alt="SAB Cliente e Técnico dashboard de ferramentas"
-              />
-            </div>
-            <h3>SAB Cliente & Técnico</h3>
-            <p>
-              App de relatórios de atendimento técnico. Participei da
-              sustentação da aplicação, com foco em melhorias visuais, correções
-              no iOS e manutenção de desempenho. Esse projeto me proporcionou
-              experiência prática com testes em dispositivos reais, refinamento
-              de UI e suporte em produção. Desenvolvido em .NET MAUI e publicado
-              na App Store.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- <section class="fade-in">
-        <h2>Contato</h2>
-        <form
-          onsubmit="event.preventDefault(); alert('Mensagem enviada com sucesso!'); this.reset();"
-        >
-          <input type="text" placeholder="Seu nome" required />
-          <input type="email" placeholder="Seu e-mail" required />
-          <textarea placeholder="Sua mensagem" rows="4" required></textarea>
-          <button type="submit">Enviar Mensagem</button>
-        </form>
-      </section> -->
     </div>
 
     <footer>
@@ -511,6 +219,7 @@
       document.querySelectorAll(".fade-in").forEach((section) => {
         observer.observe(section);
       });
+
       document.querySelectorAll(".carousel").forEach((carousel) => {
         const images = carousel.querySelectorAll("img");
         let index = 0;

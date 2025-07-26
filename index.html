@@ -186,9 +186,24 @@
         display: block;
       }
 
+      .carousel-img-web::after {
+        content: "▶";
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.5rem;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
       .carousel img.active {
         display: block;
       }
+
       .carousel::after {
         content: "▶";
         position: absolute;

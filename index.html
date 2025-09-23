@@ -445,6 +445,24 @@
           transition: none;
         }
       }
+
+      /* 1) Cards devem crescer com o conteúdo */
+      .grid {
+        align-items: start;
+      }
+
+      /* 2) Em telas menores, a experiência vira 1 coluna (nada fica espremido) */
+      @media (max-width: 880px) {
+        #experiencia .grid {
+          grid-template-columns: 1fr !important;
+        }
+      }
+
+      /* 3) Evita corte visual dentro da timeline */
+      .timeline,
+      .timeline .exp {
+        overflow: visible;
+      }
     </style>
   </head>
   <body>
@@ -778,18 +796,19 @@
         if (imgs.length > 1) play();
       });
 
-      // ====== Reveal on scroll ======
+      // ====== Reveal on scroll (mais permissivo)
       const io = new IntersectionObserver(
         (entries) => {
           entries.forEach((e) => {
-            if (e.isIntersecting) {
+            if (e.isIntersecting || e.intersectionRatio > 0) {
               e.target.classList.add("show");
               io.unobserve(e.target);
             }
           });
         },
-        { threshold: 0.08 }
+        { threshold: 0.05, rootMargin: "80px 0px" }
       );
+
       document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
     </script>
   </body>

@@ -1,584 +1,773 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Samuel – Portfólio</title>
+    <meta
+      name="description"
+      content="Samuel Simões Juren da Costa — Desenvolvedor Fullstack & Mobile (.NET MAUI, React Native, ASP.NET Core, C#, TypeScript). Portfólio, experiência e projetos."
+    />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Samuel - Portfólio</title>
     <style>
       :root {
-        --bg-color: #f9f9f9;
-        --text-color: #333;
-        --header-bg: var(--card-bg);
-        --header-text: var(--text-color);
-        --card-bg: #fefefe;
-        --footer-text: #888;
-        --hover-color: #6366f1;
-        --skill-hover: #a5b4fc;
+        --bg: #0b0b10;
+        --panel: rgba(255, 255, 255, 0.06);
+        --panel-strong: rgba(255, 255, 255, 0.12);
+        --text: #e9eefb;
+        --muted: #a9b0c3;
+        --brand: #7c8cff; /* primário */
+        --brand-2: #5ae7ff; /* acento */
+        --ring: rgba(124, 140, 255, 0.45);
+        --ok: #34d399;
+        --warn: #f59e0b;
+        --bad: #ef4444;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        --radius: 18px;
+        --radius-sm: 12px;
+        --radius-lg: 26px;
+        --blur: 14px;
+        --card-border: 1px solid rgba(255, 255, 255, 0.08);
+        --grid-gap: 22px;
       }
-
-      body.dark-mode {
-        --bg-color: #1f1f1f;
-        --text-color: #f0f0f0;
-        --header-bg: var(--card-bg);
-        --header-text: #fff;
-        --card-bg: #262626;
-        --footer-text: #aaa;
-        --hover-color: #818cf8;
-        --skill-hover: #4f46e5;
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f7f8fc;
+          --panel: rgba(0, 0, 0, 0.04);
+          --panel-strong: rgba(0, 0, 0, 0.06);
+          --text: #1b1e28;
+          --muted: #4d5566;
+          --shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+          --card-border: 1px solid rgba(0, 0, 0, 0.06);
+        }
       }
-
       * {
         box-sizing: border-box;
       }
-
+      html,
       body {
-        font-family: "Inter", sans-serif;
-        font-family: Arial, sans-serif;
+        height: 100%;
+      }
+      body {
         margin: 0;
-        padding: 0;
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        transition: background-color 0.3s, color 0.3s;
+        font-family: Inter, system-ui, Segoe UI, Roboto, Helvetica, Arial,
+          sans-serif;
+        background: radial-gradient(
+            1200px 700px at 80% -10%,
+            rgba(124, 140, 255, 0.25),
+            transparent 50%
+          ),
+          radial-gradient(
+            900px 600px at 10% -20%,
+            rgba(90, 231, 255, 0.2),
+            transparent 55%
+          ),
+          var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        overflow-x: hidden;
       }
-      header {
-        background-color: var(--header-bg);
-        color: var(--header-text);
-        padding: 30px 20px 40px;
-        text-align: center;
-        position: relative;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+
+      /* Header sticky com glass */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: saturate(140%) blur(10px);
+        background: linear-gradient(
+          180deg,
+          rgba(10, 10, 14, 0.7),
+          rgba(10, 10, 14, 0.35)
+        );
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       }
-      header h1 {
-        margin: 0;
-        padding-top: 40px;
-      }
-      .theme-toggle {
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        background: transparent;
-        color: var(--header-text);
-        border: 2px solid var(--header-text);
-        padding: 6px 12px;
-        border-radius: 4px;
-        cursor: pointer;
-        z-index: 10;
-      }
-      .container {
-        max-width: 1000px;
-        margin: 40px auto;
-        padding: 0 20px;
-      }
-      section {
-        margin-bottom: 40px;
-      }
-      h2 {
-        border-bottom: 2px solid #ddd;
-        padding-bottom: 8px;
-        margin-bottom: 20px;
-      }
-      ul.skills {
-        list-style: none;
-        padding: 0;
-        display: flex;
-        flex-wrap: wrap;
-      }
-      ul.skills li {
-        background-color: var(--card-bg);
-        color: var(--text-color);
-        border-radius: 6px;
-        padding: 6px 12px;
-        margin: 5px;
-        transition: background-color 0.3s, transform 0.3s;
+      .nav-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 14px 20px;
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 14px;
       }
-      ul.skills li:hover {
-        background-color: var(--skill-hover);
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: var(--text);
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+      .brand .logo {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: conic-gradient(
+          from 180deg,
+          var(--brand),
+          var(--brand-2) 55%,
+          var(--brand)
+        );
+        box-shadow: 0 6px 18px var(--ring);
+      }
+      .spacer {
+        flex: 1;
+      }
+      .btn {
+        appearance: none;
+        border: 0;
+        cursor: pointer;
+        border-radius: 12px;
+        padding: 10px 14px;
+        background: linear-gradient(180deg, var(--brand), #5c6bff);
         color: white;
-        transform: scale(1.05);
+        font-weight: 600;
+        box-shadow: 0 8px 22px rgba(124, 140, 255, 0.35);
+        transition: transform 0.15s ease, box-shadow 0.2s ease;
       }
-      .fade-in {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 26px rgba(124, 140, 255, 0.45);
       }
-      .fade-in.visible {
-        opacity: 1;
-        transform: translateY(0);
+      .icon-btn {
+        background: transparent;
+        color: var(--text);
+        border: var(--card-border);
+        padding: 8px 10px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
       }
-      .card-grid {
+      .icon {
+        width: 18px;
+        height: 18px;
+        opacity: 0.9;
+      }
+
+      /* Hero */
+      .hero {
+        max-width: 1100px;
+        margin: 28px auto 8px;
+        padding: 24px 20px 8px;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 20px;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 24px;
+        align-items: center;
       }
+      @media (max-width: 880px) {
+        .hero {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+      }
+      .headline {
+        background: linear-gradient(
+          180deg,
+          rgba(124, 140, 255, 0.18),
+          transparent
+        );
+        border-radius: var(--radius-lg);
+        padding: 26px;
+        border: var(--card-border);
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+      }
+      .headline h1 {
+        margin: 0 0 8px;
+        font-size: clamp(28px, 4.2vw, 46px);
+        line-height: 1.1;
+        letter-spacing: 0.2px;
+        background: linear-gradient(90deg, #fff, #cfd6ff 40%, #b2fff6 90%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .headline p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 62ch;
+      }
+      .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+      .badge {
+        border-radius: 999px;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        background: linear-gradient(180deg, var(--panel-strong), transparent);
+        border: var(--card-border);
+      }
+      .hero-card {
+        border-radius: var(--radius-lg);
+        padding: 18px;
+        border: var(--card-border);
+        background: linear-gradient(180deg, var(--panel), transparent);
+        box-shadow: var(--shadow);
+        display: grid;
+        gap: 12px;
+      }
+      .quick-links {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .link {
+        text-decoration: none;
+        color: var(--text);
+        border: var(--card-border);
+        background: linear-gradient(180deg, var(--panel), transparent);
+        padding: 10px 12px;
+        border-radius: 12px;
+        transition: transform 0.15s ease, background 0.2s ease;
+      }
+      .link:hover {
+        transform: translateY(-1px);
+        background: var(--panel-strong);
+      }
+
+      /* Seções */
+      section {
+        max-width: 1100px;
+        margin: 26px auto;
+        padding: 0 20px;
+      }
+      .section-title {
+        font-size: 1.2rem;
+        letter-spacing: 0.4px;
+        color: var(--muted);
+        margin: 18px 0 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .grid {
+        display: grid;
+        gap: var(--grid-gap);
+      }
+      .grid.cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .grid.cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      @media (max-width: 980px) {
+        .grid.cols-3 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 680px) {
+        .grid.cols-2,
+        .grid.cols-3 {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Cards base */
       .card {
-        background: var(--card-bg);
-        border-radius: 8px;
-        padding: 20px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s, border-left 0.3s;
-        border-left: 5px solid transparent;
+        position: relative;
+        border-radius: var(--radius);
+        border: var(--card-border);
+        background: linear-gradient(180deg, var(--panel), transparent);
+        padding: 18px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: transform 0.18s ease, box-shadow 0.25s ease,
+          border-color 0.25s ease;
+        isolation: isolate;
       }
       .card:hover {
-        transform: translateY(-5px);
-        border-left: 5px solid var(--hover-color);
+        transform: translateY(-3px);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+        border-color: rgba(124, 140, 255, 0.35);
       }
       .card h3 {
-        margin-top: 0;
+        margin: 0 0 6px;
+        font-size: 1.05rem;
       }
-      .card img {
-        max-width: 100%;
-        border-radius: 6px;
-        margin-bottom: 10px;
+      .card p {
+        margin: 6px 0 0;
+        color: var(--muted);
       }
-      form {
+
+      /* Skills chips animadas */
+      .chips {
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
         gap: 10px;
       }
-      input,
-      textarea,
-      button {
-        padding: 10px;
-        border-radius: 4px;
-        border: 1px solid #ccc;
-        font-size: 1rem;
+      .chip {
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: var(--card-border);
+        background: linear-gradient(180deg, var(--panel), transparent);
+        font-weight: 600;
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        transition: transform 0.12s ease, box-shadow 0.2s ease,
+          background 0.2s ease;
       }
-      button {
-        background-color: var(--hover-color);
-        color: white;
-        border: none;
-        cursor: pointer;
+      .chip:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 18px rgba(124, 140, 255, 0.25);
+        background: var(--panel-strong);
       }
+      .chip .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--brand);
+        box-shadow: 0 0 0 4px var(--ring);
+      }
+
+      /* Timeline experiência */
+      .timeline {
+        position: relative;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 14px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(var(--brand), transparent);
+        opacity: 0.55;
+      }
+      .exp {
+        position: relative;
+        margin-left: 36px;
+        padding-left: 18px;
+        padding-bottom: 18px;
+        border-left: 1px dashed rgba(255, 255, 255, 0.12);
+      }
+      .exp:last-child {
+        padding-bottom: 0;
+        border-left: 0;
+      }
+      .exp::before {
+        content: "";
+        position: absolute;
+        left: -8px;
+        top: 6px;
+        width: 14px;
+        height: 14px;
+        border-radius: 999px;
+        background: radial-gradient(
+          circle at 30% 30%,
+          var(--brand),
+          var(--brand-2)
+        );
+        box-shadow: 0 0 0 4px rgba(124, 140, 255, 0.18);
+      }
+      .meta {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      /* Projetos */
+      .project-media {
+        position: relative;
+        border-radius: 14px;
+        overflow: hidden;
+        border: var(--card-border);
+        aspect-ratio: 16/9;
+        background: #0e111a;
+      }
+      .project-media img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+      .project-media img.active {
+        opacity: 1;
+      }
+      .project-tags {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+      .tag {
+        font-size: 0.85rem;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: var(--card-border);
+        color: var(--muted);
+      }
+
+      /* Footer */
       footer {
+        max-width: 1100px;
+        margin: 40px auto 60px;
+        padding: 0 20px;
+        color: var(--muted);
         text-align: center;
-        padding: 20px;
-        font-size: 14px;
-        color: var(--footer-text);
-      }
-      .carousel {
-        position: relative;
-        overflow: hidden;
-      }
-      .carousel img {
-        display: none;
-        width: 100%;
-        border-radius: 6px;
-      }
-      .carousel-img-web {
-        position: relative;
-        overflow: hidden;
       }
 
-      .carousel-img-web img {
-        display: none;
-        width: 100%;
-        border-radius: 6px;
+      /* Fade-in ao aparecer */
+      .reveal {
+        opacity: 0;
+        transform: translateY(14px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      .reveal.show {
+        opacity: 1;
+        transform: none;
       }
 
-      .carousel-img-web img.active {
-        display: block;
+      /* Dark/Light toggle explicit */
+      .theme-toggle {
+        margin-left: 6px;
       }
 
-      .carousel-img-web::after {
-        content: "▶";
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 1.5rem;
-        background: rgba(0, 0, 0, 0.5);
-        color: white;
-        padding: 4px 8px;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-
-      .carousel img.active {
-        display: block;
-      }
-
-      .carousel::after {
-        content: "▶";
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 1.5rem;
-        background: rgba(0, 0, 0, 0.5);
-        color: white;
-        padding: 4px 8px;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-      .highlight {
-        color: var(--hover-color);
-      }
-      .btn-download {
-        display: inline-block;
-        margin-top: 20px;
-        background-color: var(--hover-color);
-        color: white;
-        padding: 10px 16px;
-        border-radius: 6px;
-        text-decoration: none;
-        font-weight: bold;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      }
-      .card {
-        border: 1px solid rgba(0, 0, 0, 0.05);
+      /* Acessibilidade reduz animação */
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          transition: none;
+        }
+        .card,
+        .btn,
+        .chip {
+          transition: none;
+        }
       }
     </style>
   </head>
   <body>
-    <header>
-      <h1>Samuel Simões Juren da Costa</h1>
-      <p>
-        Desenvolvedor Fullstack & Mobile | sammjureen@outlook.com | (11)
-        99542-2920
-      </p>
-      <p>
+    <!-- NAV -->
+    <header class="nav">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="Início">
+          <span class="logo" aria-hidden="true"></span>
+          <span>Samuel Simões Juren da Costa</span>
+        </a>
+        <div class="spacer"></div>
         <a
+          class="icon-btn link"
           href="https://github.com/samjuren"
           target="_blank"
-          style="color: #ccc"
+          rel="noopener"
           >GitHub</a
         >
-        |
         <a
+          class="icon-btn link"
           href="https://www.linkedin.com/in/samuel-juren-97145a239/"
           target="_blank"
-          style="color: #ccc"
+          rel="noopener"
           >LinkedIn</a
         >
-      </p>
-      <button class="theme-toggle" onclick="toggleTheme()">
-        🌗 Alternar Tema
-      </button>
+        <button
+          class="icon-btn theme-toggle"
+          id="themeBtn"
+          aria-label="Alternar tema"
+        >
+          🌗
+        </button>
+        <a class="btn" href="mailto:sammjureen@outlook.com">Fale comigo</a>
+      </div>
     </header>
 
-    <div class="container">
-      <section class="fade-in">
-        <h2>Resumo</h2>
-        <div class="card">
-          <p>
-            <strong>🚀 Desenvolvedor Mobile & Fullstack</strong> com sólida
-            experiência em .NET MAUI, React Native e integração com APIs
-            modernas.
-          </p>
-          <p>
-            Trabalho com excelência em C# e TypeScript, construindo apps, sites
-            e APIs performáticos com foco em escalabilidade, reusabilidade de
-            código e design centrado no usuário.
-          </p>
-          <p>
-            Tenho vivência prática na publicação de apps, componentização,
-            arquitetura MVVM, integração com Firebase, SignalR e bancos
-            relacionais (SQL Server e PostgreSQL) e NoSQL.
-          </p>
-          <p>
-            Sou movido por inovação, UI/UX de alto padrão e boas práticas de
-            engenharia de software. 👨‍💻✨
-          </p>
-          <p>
-            Atualmente, evoluo minha atuação como Desenvolvedor Fullstack com
-            foco em tecnologias Web modernas, como React, GraphQL, SSR e CMS
-            Headless.
-          </p>
+    <!-- HERO -->
+    <main id="top" class="hero">
+      <section class="headline reveal">
+        <h1>
+          Dev Mobile & Fullstack focado em <em>.NET MAUI</em>,
+          <em>React Native</em> e APIs escaláveis.
+        </h1>
+        <p>
+          Experiência sólida com C#, TypeScript, ASP.NET Core, arquitetura MVVM,
+          publicação de apps e integrações (Firebase, SignalR, Azure). UI/UX
+          caprichada, performance e código limpo.
+        </p>
+        <div class="badges">
+          <span class="badge">📍 São Paulo • BR</span>
+          <span class="badge">🚀 Disponível para novos desafios</span>
+          <span class="badge">🛠️ .NET 8 • MAUI • RN • Postgres</span>
         </div>
       </section>
 
-      <section class="fade-in">
-        <h2>Habilidades</h2>
-        <ul class="skills">
-          <li>🧩 JavaScript</li>
-          <li>⚛️ React</li>
-          <li>⚙️ Node.js</li>
-          <li>🌐 GraphQL</li>
-          <li>🔗 REST APIs</li>
-          <li>🗃️ PostgreSQL</li>
-          <li>🛢️ MySQL</li>
-          <li>🍃 MongoDB</li>
-          <li>📰 Strapi</li>
-          <li>🔧 WordPress Headless</li>
-          <li>🚀 SSR (Server-Side Rendering)</li>
-          <li>🔍 SEO Técnico</li>
-          <li>🧪 Jest</li>
-          <li>🧭 Cypress</li>
-          <li>📱 .NET MAUI</li>
-          <li>⚛️ React Native</li>
-          <li>💻 C#</li>
-          <li>🔡 TypeScript</li>
-          <li>🧩 XAML</li>
-          <li>📐 MVVM</li>
-          <li>🌐 REST APIs</li>
-          <li>🗃️ SQL Server</li>
-          <li>🐘 PostgreSQL</li>
-          <li>🔥 Firebase</li>
-          <li>📡 SignalR</li>
-          <li>🔧 Entity Framework</li>
-          <li>🚀 Azure DevOps</li>
-        </ul>
-      </section>
-
-      <section class="fade-in">
-        <h2>Experiência Profissional</h2>
-        <div class="card-grid">
-          <div class="card">
-            <h3>Desenvolvedor Fullstack & Mobile Pleno</h3>
-            <p><strong>Empresa:</strong> Onet Brasil</p>
-            <p><strong>Período:</strong> jun/2024 – atual</p>
-            <ul>
-              <li>
-                Modernização do app usado por GRU Airport, Congonhas e Hospital
-                das Clínicas
-              </li>
-              <li>
-                Reconhecimento facial com Azure e notificações push com Firebase
-              </li>
-              <li>
-                Criação de APIs em ASP.NET Core e uso de Blazor/.NET MAUI para
-                front-end
-              </li>
-              <li>
-                Sustentação no site web DigitalCheckList, ASP NET Core MVC,
-                HTML, CSS e JavaScript
-              </li>
-              <li>
-                Uso de Azure DevOps, Kanban e foco em performance e legibilidade
-                de código
-              </li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Desenvolvedor Multiplataforma Júnior</h3>
-            <p><strong>Empresa:</strong> Input Center</p>
-            <p><strong>Período:</strong> fev/2024 – jun/2024</p>
-            <ul>
-              <li>Criação de APIs REST com ASP.NET Core e automações SQL</li>
-              <li>Publicação de apps nas lojas (Google Play e App Store)</li>
-              <li>
-                Onboarding técnico: desenvolvimento de portal interno em Web
-                Forms
-              </li>
-              <li>
-                Desenvolvimento com Xamarin, .NET MAUI, HTML, CSS, JavaScript e
-                C#
-              </li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Desenvolvedor Multiplataforma Trainee</h3>
-            <p><strong>Empresa:</strong> Input Center</p>
-            <p><strong>Período:</strong> mar/2023 – fev/2024</p>
-            <ul>
-              <li>
-                Criação e manutenção de sistemas para hospitais, escolas e
-                federação de hipismo
-              </li>
-              <li>
-                Uso de Xamarin.Forms, ASP.NET Core MVC, Web Forms e Clarion
-              </li>
-              <li>
-                Desenvolvimento completo de APIs com OpenAPI, Entity Framework e
-                Swagger
-              </li>
-              <li>Otimização de queries e procedures em SQL Server</li>
-            </ul>
-          </div>
+      <aside class="hero-card reveal" aria-labelledby="contatos">
+        <h3 id="contatos" style="margin: 6px 0">Contato rápido</h3>
+        <div class="quick-links">
+          <a class="link" href="mailto:sammjureen@outlook.com">✉️ Email</a>
+          <a class="link" href="tel:+5511995422920">📱 +55 (11) 99542-2920</a>
+          <a class="link" href="#projetos">📂 Projetos</a>
+          <a class="link" href="#habilidades">🧩 Habilidades</a>
         </div>
-      </section>
+        <p class="meta">
+          Resposta rápida. Vamos conversar sobre como posso impulsionar seu
+          produto.
+        </p>
+      </aside>
+    </main>
 
-      <section class="fade-in">
-        <h2>Formação</h2>
-        <div class="card">
-          <h3>Graduação em Análise e Desenvolvimento de Sistemas (UNIP)</h3>
-          <ul style="line-height: 1.6; padding-left: 20px">
+    <!-- HABILIDADES -->
+    <section id="habilidades" class="reveal">
+      <div class="section-title">Habilidades-chave</div>
+      <div class="card">
+        <div class="chips" id="skills"></div>
+      </div>
+    </section>
+
+    <!-- EXPERIÊNCIA -->
+    <section id="experiencia" class="reveal">
+      <div class="section-title">Experiência</div>
+      <div class="grid cols-2">
+        <article class="card timeline">
+          <div class="exp">
+            <h3>Desenvolvedor Fullstack & Mobile Pleno • Onet Brasil</h3>
+            <div class="meta">jun/2024 – atual</div>
+            <p>
+              Modernização de app usado por GRU, Congonhas e HC. Reconhecimento
+              facial (Azure), push (Firebase), APIs ASP.NET Core, front com .NET
+              MAUI/Blazor, Azure DevOps e foco em performance.
+            </p>
+            <ul class="project-tags">
+              <li class="tag">.NET MAUI</li>
+              <li class="tag">ASP.NET Core</li>
+              <li class="tag">Azure</li>
+              <li class="tag">SignalR</li>
+            </ul>
+          </div>
+          <div class="exp">
+            <h3>Desenvolvedor Multiplataforma Júnior • Input Center</h3>
+            <div class="meta">fev/2024 – jun/2024</div>
+            <p>
+              APIs REST com .NET, publicação nas lojas, onboarding técnico e
+              portal interno. Xamarin/.NET MAUI, HTML/CSS/JS e C#.
+            </p>
+          </div>
+          <div class="exp">
+            <h3>Desenvolvedor Multiplataforma Trainee • Input Center</h3>
+            <div class="meta">mar/2023 – fev/2024</div>
+            <p>
+              Sistemas para hospitais, escolas e federação; Xamarin.Forms,
+              ASP.NET Core MVC e Clarion. OpenAPI, EF e SQL tuning.
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Formação</h3>
+          <ul>
             <li>
-              🧠 Programação Orientada a Objetos (POO) com foco em projetos
-              aplicados e tópicos avançados
+              <strong>ADS – UNIP</strong>: POO, Eng. de Software, UI/UX, Bancos
+              de Dados, Projetos.
             </li>
             <li>
-              📐 Engenharia de Software: processos, modelagem, testes e
-              qualidade
-            </li>
-            <li>
-              🌐 Desenvolvimento para Internet e projeto de interfaces com o
-              usuário (UI/UX)
-            </li>
-            <li>💾 Banco de Dados: modelagem, SQL e administração</li>
-            <li>
-              📊 Gerenciamento de Projetos de Software com visão estratégica e
-              boas práticas
-            </li>
-            <li>
-              🖧 Redes de Computadores, Sistemas Operacionais e Organização de
-              Computadores
-            </li>
-            <li>
-              📈 Estatística, Lógica e Matemática para Computação como base para
-              raciocínio computacional
-            </li>
-            <li>
-              🌱 Projetos interdisciplinares e apoio em ética, metodologia
-              científica, empreendedorismo e comunicação
+              <strong>MBA Eng. de Software – UNOPAR</strong> (em andamento).
             </li>
           </ul>
-        </div>
-        <div class="card" style="margin-top: 10px">
-          <h3>Pós-graduação MBA em Engenharia de Software (UNOPAR)</h3>
-          <ul style="line-height: 1.6; padding-left: 20px">
-            <li>Em andamento</li>
-          </ul>
-        </div>
-      </section>
+          <div class="badges" style="margin-top: 8px">
+            <span class="badge">📚 Estudo contínuo</span>
+            <span class="badge">🧪 Testes e qualidade</span>
+          </div>
+        </article>
+      </div>
+    </section>
 
-      <section class="fade-in">
-        <h2>Projetos em Destaque</h2>
-        <div class="card-grid">
-          <div class="card">
-            <div class="carousel">
-              <img
-                src="onetvision1.jpeg"
-                alt="Onet Vision tela login"
-                class="active"
-              />
-              <img
-                src="onetvision2.jpeg"
-                alt="Onet Vision tela de aprovação de serviço"
-              />
-            </div>
-            <h3>Onet Vision</h3>
-            <p>
-              App de gerenciamento de limpeza desenvolvido do zero de forma, com
-              foco em grandes operações. Criado integralmente em .NET MAUI, com
-              API em ASP NET Core .NET 8 com recursos de reconhecimento facial e
-              integração com serviços Azure. Utilzando SignalR para comunicação
-              em tempo real, Firebase para notificações push e Azure DevOps para
-              CI/CD. O app é usado por mais de 3.000 usuários diariamente, com
-              foco em performance e usabilidade.
-            </p>
-          </div>
-          <div class="card">
-            <div class="carousel">
-              <img
-                src="pesados1.jpeg"
-                alt="Pesados Online tela login"
-                class="active"
-              />
-              <img
-                src="pesados2.jpeg"
-                alt="Pesados Online tela de laudo e status da máquina"
-              />
-            </div>
-            <h3>Pesados Online</h3>
-            <p>
-              Aplicativo para compra e cadastro de máquinas pesadas. Atuei na
-              sustentação do projeto, realizando correções de bugs, melhorias de
-              layout e ajustes em regras de negócio. Durante esse processo,
-              aprofundei conhecimentos em manutenção de código legado, depuração
-              e colaboração com stakeholders. Feito em .NET MAUI.
-            </p>
-          </div>
-          <div class="card">
-            <div class="carousel">
-              <img
-                src="sab1.jpeg"
-                alt="SAB Cliente e Técnico tela de boas-vindas"
-                class="active"
-              />
-              <img
-                src="sab2.jpeg"
-                alt="SAB Cliente e Técnico dashboard de ferramentas"
-              />
-            </div>
-            <h3>SAB Cliente & Técnico</h3>
-            <p>
-              App de relatórios de atendimento técnico. Participei da
-              sustentação da aplicação, com foco em melhorias visuais, correções
-              no iOS e manutenção de desempenho. Esse projeto me proporcionou
-              experiência prática com testes em dispositivos reais, refinamento
-              de UI e suporte em produção. Desenvolvido em .NET MAUI e publicado
-              na App Store.
-            </p>
-          </div>
-          <div class="card">
-            <div class="carousel-img-web">
-              <img
-                src="sitedigitalchecklist1.png"
-                alt="DigitalCheckList tela de login"
-                class="active"
-              />
-              <img
-                src="sitedigitalchecklist2.png"
-                alt="DigitalCheckList dashboard de checklist"
-              />
-            </div>
-            <h3>DigitalCheckList - Onet</h3>
-            <p>
-              Participei da sustentação do sistema web
-              <strong>Checklist Digital</strong>, desenvolvido em
-              <strong>ASP.NET Core MVC .NET 8</strong>, com foco em melhorias
-              visuais, correções de bugs, ajustes em regras de negócio e
-              evolução de funcionalidades. Trabalhei em contato direto com
-              usuários e stakeholders para garantir estabilidade e usabilidade
-              da plataforma. Usando HTML, CSS, JavaScript e C#, implementei
-              melhorias na interface, tornando-a mais intuitiva e responsiva.
-            </p>
-          </div>
-        </div>
-      </section>
+    <!-- PROJETOS -->
+    <section id="projetos" class="reveal">
+      <div class="section-title">Projetos em destaque</div>
+      <div class="grid cols-3" id="projects"></div>
+    </section>
 
-      <!-- <section class="fade-in">
-        <h2>Contato</h2>
-        <form
-          onsubmit="event.preventDefault(); alert('Mensagem enviada com sucesso!'); this.reset();"
-        >
-          <input type="text" placeholder="Seu nome" required />
-          <input type="email" placeholder="Seu e-mail" required />
-          <textarea placeholder="Sua mensagem" rows="4" required></textarea>
-          <button type="submit">Enviar Mensagem</button>
-        </form>
-      </section> -->
-    </div>
-
-    <footer>
-      &copy; 2025 Samuel Simões Juren da Costa. Todos os direitos reservados.
+    <footer class="reveal">
+      © 2025 Samuel Simões Juren da Costa — Feito com 🖤, C# e TypeScript.
     </footer>
 
     <script>
-      function toggleTheme() {
-        document.body.classList.toggle("dark-mode");
+      // ====== Tema com persistência ======
+      const STORAGE_KEY = "samuel-theme";
+      const root = document.documentElement;
+      const themeBtn = document.getElementById("themeBtn");
+
+      function setTheme(mode) {
+        if (mode === "light") {
+          document.documentElement.setAttribute("data-theme", "light");
+          // força paleta clara
+          document
+            .querySelector('meta[name="color-scheme"]')
+            ?.setAttribute("content", "light");
+        } else {
+          document.documentElement.setAttribute("data-theme", "dark");
+          document
+            .querySelector('meta[name="color-scheme"]')
+            ?.setAttribute("content", "dark");
+        }
+        localStorage.setItem(STORAGE_KEY, mode);
       }
+      function currentTheme() {
+        return (
+          localStorage.getItem(STORAGE_KEY) ||
+          (window.matchMedia("(prefers-color-scheme: light)").matches
+            ? "light"
+            : "dark")
+        );
+      }
+      // aplica data-theme → CSS usa prefers-color-scheme já preparado
+      setTheme(currentTheme());
+      themeBtn.addEventListener("click", () =>
+        setTheme(currentTheme() === "light" ? "dark" : "light")
+      );
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
+      // ====== Conteúdos (fácil manutenção) ======
+      const SKILLS = [
+        "C#",
+        ".NET 8",
+        ".NET MAUI",
+        "XAML",
+        "MVVM",
+        "ASP.NET Core",
+        "Entity Framework",
+        "SignalR",
+        "Azure DevOps",
+        "TypeScript",
+        "Node.js",
+        "React",
+        "React Native",
+        "GraphQL",
+        "REST APIs",
+        "Jest",
+        "Cypress",
+        "SQL Server",
+        "PostgreSQL",
+        "MongoDB",
+        "Firebase",
+        "SEO Técnico",
+        "SSR",
+        "Strapi",
+        "WordPress Headless",
+      ];
+      const PROJECTS = [
+        {
+          title: "Onet Vision",
+          desc: "App enterprise de limpeza com reconhecimento facial, push, realtime (SignalR) e CI/CD (Azure DevOps). Feito em .NET MAUI + ASP.NET Core.",
+          tags: [
+            ".NET MAUI",
+            "ASP.NET Core",
+            ".NET 8",
+            "Azure",
+            "SignalR",
+            "Firebase",
+          ],
+          images: ["onetvision1.jpeg", "onetvision2.jpeg"],
+        },
+        {
+          title: "Pesados Online",
+          desc: "Aplicativo para compra/cadastro de máquinas pesadas. Correções, UX, regras de negócio e manutenção de legado. .NET MAUI.",
+          tags: [".NET MAUI", "UX", "Refactor"],
+          images: ["pesados1.jpeg", "pesados2.jpeg"],
+        },
+        {
+          title: "SAB Cliente & Técnico",
+          desc: "Relatórios de atendimento com foco em estabilidade no iOS, UI refinada e publicação na App Store.",
+          tags: [".NET MAUI", "iOS", "Publicação"],
+          images: ["sab1.jpeg", "sab2.jpeg"],
+        },
+        {
+          title: "DigitalCheckList – Onet",
+          desc: "Sustentação do sistema web em ASP.NET Core MVC .NET 8. Melhorias visuais, correções e evolução de features.",
+          tags: ["ASP.NET Core MVC", ".NET 8", "Web"],
+          images: ["sitedigitalchecklist1.png", "sitedigitalchecklist2.png"],
+        },
+      ];
+
+      // ====== Render Skills com microinteração ======
+      const skillEl = document.getElementById("skills");
+      SKILLS.forEach((s, i) => {
+        const chip = document.createElement("span");
+        chip.className = "chip";
+        chip.style.animationDelay = i * 35 + "ms";
+        chip.innerHTML = `<span class="dot"></span>${s}`;
+        chip.addEventListener(
+          "mouseenter",
+          () => (chip.style.boxShadow = "0 10px 24px rgba(124,140,255,.35)")
+        );
+        chip.addEventListener("mouseleave", () => (chip.style.boxShadow = ""));
+        skillEl.appendChild(chip);
+      });
+
+      // ====== Render Projetos com carrossel auto-play (pausa no hover) ======
+      const projectsEl = document.getElementById("projects");
+      PROJECTS.forEach((p, idx) => {
+        const card = document.createElement("article");
+        card.className = "card";
+        // media
+        const media = document.createElement("div");
+        media.className = "project-media";
+        p.images.forEach((src, i) => {
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = `${p.title} imagem ${i + 1}`;
+          if (i === 0) img.classList.add("active");
+          media.appendChild(img);
         });
+        // conteúdo
+        const h3 = document.createElement("h3");
+        h3.textContent = p.title;
+        const d = document.createElement("p");
+        d.textContent = p.desc;
+        const tags = document.createElement("div");
+        tags.className = "project-tags";
+        p.tags.forEach((t) => {
+          const tag = document.createElement("span");
+          tag.className = "tag";
+          tag.textContent = t;
+          tags.appendChild(tag);
+        });
+        card.append(media, h3, d, tags);
+        projectsEl.appendChild(card);
+
+        // autoplay
+        const imgs = Array.from(media.querySelectorAll("img"));
+        let i = 0;
+        let timer = null;
+        const play = () =>
+          (timer = setInterval(() => {
+            imgs[i].classList.remove("active");
+            i = (i + 1) % imgs.length;
+            imgs[i].classList.add("active");
+          }, 2800));
+        const pause = () => {
+          if (timer) clearInterval(timer);
+        };
+        media.addEventListener("mouseenter", pause);
+        media.addEventListener("mouseleave", () => {
+          pause();
+          play();
+        });
+        // inicia
+        if (imgs.length > 1) play();
       });
 
-      document.querySelectorAll(".fade-in").forEach((section) => {
-        observer.observe(section);
-      });
-      document
-        .querySelectorAll(".carousel, .carousel-img-web")
-        .forEach((carousel) => {
-          const images = carousel.querySelectorAll("img");
-          let index = 0;
-          carousel.addEventListener("click", () => {
-            images[index].classList.remove("active");
-            index = (index + 1) % images.length;
-            images[index].classList.add("active");
+      // ====== Reveal on scroll ======
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("show");
+              io.unobserve(e.target);
+            }
           });
-        });
+        },
+        { threshold: 0.08 }
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
     </script>
   </body>
 </html>

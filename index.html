@@ -33,17 +33,6 @@
         --card-border: 1px solid rgba(255, 255, 255, 0.08);
         --grid-gap: 22px;
       }
-      @media (prefers-color-scheme: light) {
-        :root {
-          --bg: #f7f8fc;
-          --panel: rgba(0, 0, 0, 0.04);
-          --panel-strong: rgba(0, 0, 0, 0.06);
-          --text: #1b1e28;
-          --muted: #4d5566;
-          --shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-          --card-border: 1px solid rgba(0, 0, 0, 0.06);
-        }
-      }
       * {
         box-sizing: border-box;
       }
@@ -429,11 +418,6 @@
         transform: none;
       }
 
-      /* Dark/Light toggle explicit */
-      .theme-toggle {
-        margin-left: 6px;
-      }
-
       /* Acessibilidade reduz animação */
       @media (prefers-reduced-motion: reduce) {
         .reveal {
@@ -451,7 +435,7 @@
         align-items: start;
       }
 
-      /* 2) Em telas menores, a experiência vira 1 coluna (nada fica espremido) */
+      /* 2) Em telas menores, a experiência vira 1 coluna */
       @media (max-width: 880px) {
         #experiencia .grid {
           grid-template-columns: 1fr !important;
@@ -488,13 +472,6 @@
           rel="noopener"
           >LinkedIn</a
         >
-        <button
-          class="icon-btn theme-toggle"
-          id="themeBtn"
-          aria-label="Alternar tema"
-        >
-          🌗
-        </button>
         <a class="btn" href="mailto:sammjureen@outlook.com">Fale comigo</a>
       </div>
     </header>
@@ -554,10 +531,7 @@
               <strong>React Native</strong> (Expo/Expo Router), backend em
               <strong>Node.js/TypeScript</strong>, autenticação e persistência
               com <strong>Supabase</strong>, além de features de IA usando
-              <strong>LLMs</strong>
-              (integração de modelos, prompt engineering e contexto com
-              ferramentas). Foco em UX, performance e observabilidade de ponta a
-              ponta.
+              <strong>LLMs</strong>.
             </p>
             <ul class="project-tags">
               <li class="tag">React Native</li>
@@ -629,41 +603,7 @@
     </footer>
 
     <script>
-      // ====== Tema com persistência ======
-      const STORAGE_KEY = "samuel-theme";
-      const root = document.documentElement;
-      const themeBtn = document.getElementById("themeBtn");
-
-      function setTheme(mode) {
-        if (mode === "light") {
-          document.documentElement.setAttribute("data-theme", "light");
-          // força paleta clara
-          document
-            .querySelector('meta[name="color-scheme"]')
-            ?.setAttribute("content", "light");
-        } else {
-          document.documentElement.setAttribute("data-theme", "dark");
-          document
-            .querySelector('meta[name="color-scheme"]')
-            ?.setAttribute("content", "dark");
-        }
-        localStorage.setItem(STORAGE_KEY, mode);
-      }
-      function currentTheme() {
-        return (
-          localStorage.getItem(STORAGE_KEY) ||
-          (window.matchMedia("(prefers-color-scheme: light)").matches
-            ? "light"
-            : "dark")
-        );
-      }
-      // aplica data-theme → CSS usa prefers-color-scheme já preparado
-      setTheme(currentTheme());
-      themeBtn.addEventListener("click", () =>
-        setTheme(currentTheme() === "light" ? "dark" : "light")
-      );
-
-      // ====== Conteúdos (fácil manutenção) ======
+      // ====== Conteúdos ======
       const SKILLS = [
         "C#",
         ".NET 8",
@@ -728,27 +668,21 @@
         },
       ];
 
-      // ====== Render Skills com microinteração ======
+      // ====== Render Skills ======
       const skillEl = document.getElementById("skills");
       SKILLS.forEach((s, i) => {
         const chip = document.createElement("span");
         chip.className = "chip";
         chip.style.animationDelay = i * 35 + "ms";
         chip.innerHTML = `<span class="dot"></span>${s}`;
-        chip.addEventListener(
-          "mouseenter",
-          () => (chip.style.boxShadow = "0 10px 24px rgba(124,140,255,.35)")
-        );
-        chip.addEventListener("mouseleave", () => (chip.style.boxShadow = ""));
         skillEl.appendChild(chip);
       });
 
-      // ====== Render Projetos com carrossel auto-play (pausa no hover) ======
+      // ====== Render Projetos com carrossel ======
       const projectsEl = document.getElementById("projects");
-      PROJECTS.forEach((p, idx) => {
+      PROJECTS.forEach((p) => {
         const card = document.createElement("article");
         card.className = "card";
-        // media
         const media = document.createElement("div");
         media.className = "project-media";
         p.images.forEach((src, i) => {
@@ -758,7 +692,6 @@
           if (i === 0) img.classList.add("active");
           media.appendChild(img);
         });
-        // conteúdo
         const h3 = document.createElement("h3");
         h3.textContent = p.title;
         const d = document.createElement("p");
@@ -774,7 +707,6 @@
         card.append(media, h3, d, tags);
         projectsEl.appendChild(card);
 
-        // autoplay
         const imgs = Array.from(media.querySelectorAll("img"));
         let i = 0;
         let timer = null;
@@ -784,19 +716,16 @@
             i = (i + 1) % imgs.length;
             imgs[i].classList.add("active");
           }, 2800));
-        const pause = () => {
-          if (timer) clearInterval(timer);
-        };
+        const pause = () => timer && clearInterval(timer);
         media.addEventListener("mouseenter", pause);
         media.addEventListener("mouseleave", () => {
           pause();
           play();
         });
-        // inicia
         if (imgs.length > 1) play();
       });
 
-      // ====== Reveal on scroll (mais permissivo)
+      // ====== Reveal on scroll ======
       const io = new IntersectionObserver(
         (entries) => {
           entries.forEach((e) => {
@@ -808,7 +737,6 @@
         },
         { threshold: 0.05, rootMargin: "80px 0px" }
       );
-
       document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
     </script>
   </body>

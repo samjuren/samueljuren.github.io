@@ -1,758 +1,149 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Samuel – Portfólio</title>
-    <meta
-      name="description"
-      content="Samuel Simões Juren da Costa — Desenvolvedor Fullstack & Mobile (.NET MAUI, React Native, ASP.NET Core, C#, TypeScript). Portfólio, experiência e projetos."
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --bg: #111827;
-        --panel: rgba(255, 255, 255, 0.06);
-        --panel-strong: rgba(255, 255, 255, 0.12);
-        --text: #e9eefb;
-        --muted: #a9b0c3;
-        --brand: #7c8cff;
-        --brand-2: #5ae7ff;
-        --ring: rgba(124, 140, 255, 0.45);
-        --ok: #34d399;
-        --warn: #f59e0b;
-        --bad: #ef4444;
-        --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-        --radius: 18px;
-        --radius-sm: 12px;
-        --radius-lg: 26px;
-        --blur: 14px;
-        --card-border: 1px solid rgba(255, 255, 255, 0.08);
-        --grid-gap: 22px;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        height: 100%;
-      }
-      body {
-        margin: 0;
-        font-family: Inter, system-ui, Segoe UI, Roboto, Helvetica, Arial,
-          sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.6;
-        overflow-x: hidden;
-      }
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Currículo – Samuel Simões Juren da Costa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --text:#111; --muted:#555; --line:#e5e7eb; }
+    *{box-sizing:border-box}
+    body{
+      margin:0; padding:24px;
+      font: 15px/1.6 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text); background:#fff;
+    }
+    .page{max-width:820px;margin:0 auto}
+    header{display:flex;justify-content:space-between;gap:24px;align-items:flex-start}
+    h1{font-size:28px;line-height:1.2;margin:0 0 6px}
+    .role{font-weight:600;color:var(--muted)}
+    .contacts{font-size:14px;color:var(--muted)}
+    .contacts a{color:inherit;text-decoration:none}
+    hr{border:0;border-top:1px solid var(--line);margin:16px 0}
+    section{margin:16px 0}
+    h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
 
-      /* Header sticky com glass */
-      .nav {
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        backdrop-filter: saturate(140%) blur(10px);
-        background: linear-gradient(
-          180deg,
-          rgba(10, 10, 14, 0.7),
-          rgba(10, 10, 14, 0.35)
-        );
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      }
-      .nav-inner {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 14px 20px;
-        display: flex;
-        align-items: center;
-        gap: 14px;
-      }
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        text-decoration: none;
-        color: var(--text);
-        font-weight: 700;
-        letter-spacing: 0.2px;
-      }
-      .brand .logo {
-        width: 36px;
-        height: 36px;
-        border-radius: 10px;
-        background: conic-gradient(
-          from 180deg,
-          var(--brand),
-          var(--brand-2) 55%,
-          var(--brand)
-        );
-        box-shadow: 0 6px 18px var(--ring);
-      }
-      .spacer {
-        flex: 1;
-      }
-      .btn {
-        appearance: none;
-        border: 0;
-        cursor: pointer;
-        border-radius: 12px;
-        padding: 10px 14px;
-        background: linear-gradient(180deg, var(--brand), #5c6bff);
-        color: white;
-        font-weight: 600;
-        box-shadow: 0 8px 22px rgba(124, 140, 255, 0.35);
-        transition: transform 0.15s ease, box-shadow 0.2s ease;
-      }
-      .btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 12px 26px rgba(124, 140, 255, 0.45);
-      }
-      .icon-btn {
-        background: transparent;
-        color: var(--text);
-        border: var(--card-border);
-        padding: 8px 10px;
-        border-radius: 12px;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .icon {
-        width: 18px;
-        height: 18px;
-        opacity: 0.9;
-      }
+    /* Experiência no formato simples */
+    .xp-block{padding:10px 0;border-bottom:1px solid var(--line)}
+    .xp-block:last-child{border-bottom:0}
+    .xp-role{font-weight:700}
+    .xp-company,.xp-dates,.xp-location{color:var(--muted)}
+    .xp-desc{margin-top:6px;font-size:14px;color:var(--text);line-height:1.5}
 
-      /* Hero */
-      .hero {
-        max-width: 1100px;
-        margin: 28px auto 8px;
-        padding: 24px 20px 8px;
-        display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 24px;
-        align-items: center;
-      }
-      @media (max-width: 880px) {
-        .hero {
-          grid-template-columns: 1fr;
-          gap: 14px;
-        }
-      }
-      .headline {
-        background: linear-gradient(
-          180deg,
-          rgba(124, 140, 255, 0.18),
-          transparent
-        );
-        border-radius: var(--radius-lg);
-        padding: 26px;
-        border: var(--card-border);
-        box-shadow: var(--shadow);
-        position: relative;
-        overflow: hidden;
-        isolation: isolate;
-      }
-      .headline h1 {
-        margin: 0 0 8px;
-        font-size: clamp(28px, 4.2vw, 46px);
-        line-height: 1.1;
-        letter-spacing: 0.2px;
-        background: linear-gradient(90deg, #fff, #cfd6ff 40%, #b2fff6 90%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-      }
-      .headline p {
-        margin: 0;
-        color: var(--muted);
-        max-width: 62ch;
-      }
-      .badges {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 14px;
-      }
-      .badge {
-        border-radius: 999px;
-        padding: 8px 12px;
-        font-size: 0.9rem;
-        background: linear-gradient(180deg, var(--panel-strong), transparent);
-        border: var(--card-border);
-      }
-      .hero-card {
-        border-radius: var(--radius-lg);
-        padding: 18px;
-        border: var(--card-border);
-        background: linear-gradient(180deg, var(--panel), transparent);
-        box-shadow: var(--shadow);
-        display: grid;
-        gap: 12px;
-      }
-      .quick-links {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-      .link {
-        text-decoration: none;
-        color: var(--text);
-        border: var(--card-border);
-        background: linear-gradient(180deg, var(--panel), transparent);
-        padding: 10px 12px;
-        border-radius: 12px;
-        transition: transform 0.15s ease, background 0.2s ease;
-      }
-      .link:hover {
-        transform: translateY(-1px);
-        background: var(--panel-strong);
-      }
-
-      /* Seções */
-      section {
-        max-width: 1100px;
-        margin: 26px auto;
-        padding: 0 20px;
-      }
-      .section-title {
-        font-size: 1.2rem;
-        letter-spacing: 0.4px;
-        color: var(--muted);
-        margin: 18px 0 12px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .grid {
-        display: grid;
-        gap: var(--grid-gap);
-      }
-      .grid.cols-3 {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-      .grid.cols-2 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      @media (max-width: 980px) {
-        .grid.cols-3 {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-      @media (max-width: 680px) {
-        .grid.cols-2,
-        .grid.cols-3 {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      /* Cards base */
-      .card {
-        position: relative;
-        border-radius: var(--radius);
-        border: var(--card-border);
-        background: linear-gradient(180deg, var(--panel), transparent);
-        padding: 18px;
-        overflow: hidden;
-        box-shadow: var(--shadow);
-        transition: transform 0.18s ease, box-shadow 0.25s ease,
-          border-color 0.25s ease;
-        isolation: isolate;
-      }
-      .card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-        border-color: rgba(124, 140, 255, 0.35);
-      }
-      .card h3 {
-        margin: 0 0 6px;
-        font-size: 1.05rem;
-      }
-      .card p {
-        margin: 6px 0 0;
-        color: var(--muted);
-      }
-
-      /* Skills chips animadas */
-      .chips {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      .chip {
-        padding: 10px 12px;
-        border-radius: 12px;
-        border: var(--card-border);
-        background: linear-gradient(180deg, var(--panel), transparent);
-        font-weight: 600;
-        display: inline-flex;
-        gap: 8px;
-        align-items: center;
-        transition: transform 0.12s ease, box-shadow 0.2s ease,
-          background 0.2s ease;
-      }
-      .chip:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 18px rgba(124, 140, 255, 0.25);
-        background: var(--panel-strong);
-      }
-      .chip .dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 999px;
-        background: var(--brand);
-        box-shadow: 0 0 0 4px var(--ring);
-      }
-
-      /* Timeline experiência */
-      .timeline {
-        position: relative;
-      }
-      .timeline::before {
-        content: "";
-        position: absolute;
-        left: 14px;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background: linear-gradient(var(--brand), transparent);
-        opacity: 0.55;
-      }
-      .exp {
-        position: relative;
-        margin-left: 36px;
-        padding-left: 18px;
-        padding-bottom: 18px;
-        border-left: 1px dashed rgba(255, 255, 255, 0.12);
-      }
-      .exp:last-child {
-        padding-bottom: 0;
-        border-left: 0;
-      }
-      .exp::before {
-        content: "";
-        position: absolute;
-        left: -8px;
-        top: 6px;
-        width: 14px;
-        height: 14px;
-        border-radius: 999px;
-        background: radial-gradient(
-          circle at 30% 30%,
-          var(--brand),
-          var(--brand-2)
-        );
-        box-shadow: 0 0 0 4px rgba(124, 140, 255, 0.18);
-      }
-      .meta {
-        color: var(--muted);
-        font-size: 0.95rem;
-      }
-
-      /* Projetos */
-      .project-media {
-        position: relative;
-        border-radius: 14px;
-        overflow: hidden;
-        border: var(--card-border);
-        aspect-ratio: 16/9;
-        background: #0e111a;
-      }
-      .project-media img {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0;
-        transition: opacity 0.4s ease;
-      }
-      .project-media img.active {
-        opacity: 1;
-      }
-      .project-tags {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        margin-top: 10px;
-      }
-      .tag {
-        font-size: 0.85rem;
-        padding: 6px 10px;
-        border-radius: 999px;
-        border: var(--card-border);
-        color: var(--muted);
-      }
-
-      /* Footer */
-      footer {
-        max-width: 1100px;
-        margin: 40px auto 60px;
-        padding: 0 20px;
-        color: var(--muted);
-        text-align: center;
-      }
-
-      /* Fade-in ao aparecer */
-      .reveal {
-        opacity: 0;
-        transform: translateY(14px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
-      }
-      .reveal.show {
-        opacity: 1;
-        transform: none;
-      }
-
-      /* Acessibilidade reduz animação */
-      @media (prefers-reduced-motion: reduce) {
-        .reveal {
-          transition: none;
-        }
-        .card,
-        .btn,
-        .chip {
-          transition: none;
-        }
-      }
-
-      /* 1) Cards devem crescer com o conteúdo */
-      .grid {
-        align-items: start;
-      }
-
-      /* 2) Em telas menores, a experiência vira 1 coluna */
-      @media (max-width: 880px) {
-        #experiencia .grid {
-          grid-template-columns: 1fr !important;
-        }
-      }
-
-      /* 3) Evita corte visual dentro da timeline */
-      .timeline,
-      .timeline .exp {
-        overflow: visible;
-      }
-
-      .brand span {
-        white-space: nowrap;
-        font-size: 1rem;
-      }
-
-      .nav-inner {
-        flex-wrap: wrap; /* deixa os botões quebrarem, não o nome */
-      }
-    </style>
-  </head>
-  <body>
-    <!-- NAV -->
-    <header class="nav">
-      <div class="nav-inner">
-        <a class="brand" href="#top" aria-label="Início">
-          <span class="logo" aria-hidden="true"></span>
-          <span>Samuel Simões Juren da Costa</span>
-        </a>
-        <div class="spacer"></div>
-        <a
-          class="icon-btn link"
-          href="https://github.com/samjuren"
-          target="_blank"
-          rel="noopener"
-          >GitHub</a
-        >
-        <a
-          class="icon-btn link"
-          href="https://www.linkedin.com/in/samuel-juren-97145a239/"
-          target="_blank"
-          rel="noopener"
-          >LinkedIn</a
-        >
-        <a class="btn" href="mailto:sammjureen@outlook.com">Fale comigo</a>
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{border:1px solid var(--line);padding:4px 8px;border-radius:999px;font-size:13px}
+    @media print{
+      body{padding:0}
+      a{text-decoration:none;color:var(--text)}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <h1>Samuel Simões Juren da Costa</h1>
+        <div class="role">Engenheiro de Software</div>
+      </div>
+      <div class="contacts" style="text-align:right">
+        <div><a href="mailto:samuel@email.com">samuel@email.com</a></div>
+        <div>(11) 99999-0000 • São Paulo, SP</div>
+        <div><a href="https://github.com/seu-github" target="_blank" rel="noreferrer">github.com/seu-github</a></div>
+        <div><a href="https://www.linkedin.com/in/seu-linkedin" target="_blank" rel="noreferrer">linkedin.com/in/seu-linkedin</a></div>
       </div>
     </header>
 
-    <!-- HERO -->
-    <main id="top" class="hero">
-      <section class="headline reveal">
-        <h1>Desenvolvedor Mobile & Fullstack</h1>
-        <ul>
-          <li>
-            Especialista em .NET (MAUI, ASP NET Core), React Native, C# e
-            TypeScript, com forte atuação em projetos reais publicados nas
-            lojas.
-          </li>
-        </ul>
-        <ul>
-          <li>
-            Há mais de 2 anos com experiência, vivência prática com todo o
-            ecossistema mobile e backend, integrando LLMs (Inteligência
-            Artificial) para moderação (textos, imagens e áudios), APIs REST,
-            Firebase, SignalR, Supabase, bancos de dados relacionais e NoSQL.
-          </li>
-        </ul>
-        <ul>
-          <li>
-            Já atuei com grandes clientes como GRU Airport, Hospital das
-            Clínicas, Portal Tela e sempre entregando soluções robustas.
-            Apaixonado por resolver problemas com código limpo, acessível e
-            performático.
-          </li>
-        </ul>
-        <div class="badges">
-          <span class="badge">📍 São Paulo • BR</span>
-          <span class="badge">🚀 Disponível para novos desafios</span>
-          <span class="badge"
-            >🛠️ MAUI • React Native • ASP NET Core • Supabase • SQL</span
-          >
-        </div>
-      </section>
+    <hr/>
 
-      <aside class="hero-card reveal" aria-labelledby="contatos">
-        <h3 id="contatos" style="margin: 6px 0">Contato rápido</h3>
-        <div class="quick-links">
-          <a class="link" href="mailto:sammjureen@outlook.com">✉️ Email</a>
-          <a class="link" href="tel:+5511995422920">📱 +55 (11) 99542-2920</a>
-          <a class="link" href="#projetos">📂 Projetos</a>
-          <a class="link" href="#habilidades">🧩 Habilidades</a>
-        </div>
-        <p class="meta">
-          Resposta rápida. Vamos conversar sobre como posso impulsionar seu
-          produto.
+    <section>
+      <h2>Resumo</h2>
+      <p>Desenvolvedor Mobile & Full Stack com foco em qualidade de código, UX e entrega de valor. Experiência com .NET MAUI, Flutter, React Native e APIs em ASP.NET Core (CQRS/Clean). Publicação em lojas, integrações REST, Firebase/SignalR, CI/CD.</p>
+    </section>
+
+    <section>
+      <h2>Experiência</h2>
+
+      <div class="xp-block">
+        <div class="xp-role">CEO</div>
+        <div class="xp-company">Ordem Simples — Autônomo</div>
+        <div class="xp-dates">Agosto de 2025 — Atual</div>
+        <div class="xp-location">São Paulo, Brasil</div>
+        <p class="xp-desc">
+          Fundador e responsável técnico pela plataforma de gestão inteligente <strong>Ordem Simples</strong>, desenvolvida em <strong>Flutter</strong> com backend no <strong>Supabase</strong>. Atuação em todas as etapas do produto — concepção, design, arquitetura, desenvolvimento, testes e publicação.
+          Liderança técnica, planejamento de roadmap, priorização de features e foco em performance e experiência do usuário.
         </p>
-      </aside>
-    </main>
+      </div>
 
-    <!-- HABILIDADES -->
-    <section id="habilidades" class="reveal">
-      <div class="section-title">Habilidades-chave</div>
-      <div class="card">
-        <div class="chips" id="skills"></div>
+      <div class="xp-block">
+        <div class="xp-role">Engenheiro Mobile</div>
+        <div class="xp-company">Projetos .NET MAUI & React Native — Freelancer</div>
+        <div class="xp-dates">2023 — Atual</div>
+        <div class="xp-location">São Paulo, Brasil (Remoto/Híbrido)</div>
+        <p class="xp-desc">
+          Desenvolvimento de aplicativos multiplataforma com <strong>.NET MAUI</strong> e <strong>React Native</strong>, aplicando padrões de arquitetura limpa (<strong>MVVM</strong> e <strong>DDD</strong>). 
+          Responsável por integrações com APIs REST, autenticação JWT, push notifications, deep links e publicações em App Store e Google Play.
+        </p>
+      </div>
+
+      <div class="xp-block">
+        <div class="xp-role">Desenvolvedor Backend</div>
+        <div class="xp-company">APIs ASP.NET Core — Freelancer</div>
+        <div class="xp-dates">2022 — Atual</div>
+        <div class="xp-location">Brasil</div>
+        <p class="xp-desc">
+          Criação e manutenção de APIs escaláveis em <strong>ASP.NET Core</strong>, utilizando <strong>CQRS</strong>, <strong>MediatR</strong> e <strong>Entity Framework Core</strong>.
+          Implementação de autenticação e autorização via JWT, versionamento de endpoints, documentação com Swagger e pipelines de CI/CD com GitHub Actions e Docker.
+        </p>
       </div>
     </section>
 
-    <!-- EXPERIÊNCIA -->
-    <section id="experiencia" class="reveal">
-      <div class="section-title">Experiência</div>
-      <div class="grid cols-2">
-        <article class="card timeline">
-          <div class="exp">
-            <h3>Desenvolvedor Mobile & Full Stack • 2Future</h3>
-            <div class="meta">ago/2025 - atual</div>
-            <p>
-              Desenvolvimento de apps com
-              <strong>React Native</strong> (Expo/Expo Router), backend em
-              <strong>Node.js/TypeScript</strong>, autenticação e persistência
-              com <strong>Supabase</strong>, além de features de IA usando
-              <strong>LLMs</strong>.
-            </p>
-            <div class="project-tags">
-              <span class="tag">React Native</span>
-              <span class="tag">Node.js</span>
-              <span class="tag">Supabase</span>
-              <span class="tag">LLMs</span>
-            </div>
-          </div>
-          <div class="exp">
-            <h3>Desenvolvedor Fullstack & Mobile Pleno • Onet Brasil</h3>
-            <div class="meta">jun/2024 – ago/2025</div>
-            <p>
-              Modernização de app usado por GRU, Congonhas e HC. Reconhecimento
-              facial (Azure), push (Firebase), APIs ASP.NET Core, front com .NET
-              MAUI/Blazor, Azure DevOps e foco em performance.
-            </p>
-            <div class="project-tags">
-              <span class="tag">React Native</span>
-              <span class="tag">Node.js</span>
-              <span class="tag">Supabase</span>
-              <span class="tag">LLMs</span>
-            </div>
-          </div>
-          <div class="exp">
-            <h3>Desenvolvedor Multiplataforma Júnior • Input Center</h3>
-            <div class="meta">fev/2024 – jun/2024</div>
-            <p>
-              APIs REST com .NET, publicação nas lojas, onboarding técnico e
-              portal interno. Xamarin/.NET MAUI, HTML/CSS/JS e C#.
-            </p>
-          </div>
-          <div class="exp">
-            <h3>Desenvolvedor Multiplataforma Trainee • Input Center</h3>
-            <div class="meta">mar/2023 – fev/2024</div>
-            <p>
-              Sistemas para hospitais, escolas e federação; Xamarin.Forms,
-              ASP.NET Core MVC e Clarion. OpenAPI, EF e SQL tuning.
-            </p>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Formação</h3>
-          <ul>
-            <li>
-              <strong>Análise e Desenvolvimento de Sistemas – UNIP</strong>
-              Curso Superior de Tecnologia (CST) - jul/2022 - jul/2025
-            </li>
-            <li>
-              <strong>MBA Eng. de Software – UNOPAR</strong>
-              Pós-graduação Lato Sensu - MBA (em andamento).
-            </li>
-          </ul>
-          <div class="badges" style="margin-top: 8px">
-            <span class="badge">📚 Estudo contínuo</span>
-            <span class="badge">🧪 Testes e qualidade</span>
-          </div>
-        </article>
+    <section>
+      <h2>Projetos</h2>
+      <div class="xp-block">
+        <div class="xp-role">TwoBetter (Mobile)</div>
+        <div class="xp-company">Flutter — Arquitetura Limpa</div>
+        <div class="xp-dates">2025</div>
+        <div class="xp-location">App com jornadas guiadas e métricas</div>
+        <p class="xp-desc">
+          Aplicativo de formação pessoal com jornadas, conteúdos interativos e acompanhamento de progresso. Desenvolvimento em Flutter com state management modular e integração a serviços de IA.
+        </p>
+      </div>
+      <div class="xp-block">
+        <div class="xp-role">POC ML Kit Face Detection</div>
+        <div class="xp-company">.NET MAUI • CameraX (Android)</div>
+        <div class="xp-dates">2025</div>
+        <div class="xp-location">Detecção facial para segurança/acesso</div>
+        <p class="xp-desc">
+          Prova de conceito integrando o <strong>Google ML Kit</strong> e <strong>CameraX</strong> em um app .NET MAUI. Implementação de detecção facial em tempo real, otimização de desempenho e compatibilidade com Android e iOS.
+        </p>
       </div>
     </section>
 
-    <!-- PROJETOS -->
-    <section id="projetos" class="reveal">
-      <div class="section-title">Projetos em destaque</div>
-      <div class="grid cols-3" id="projects"></div>
+    <section>
+      <h2>Habilidades</h2>
+      <div class="chips">
+        <span class="chip">.NET MAUI</span>
+        <span class="chip">Flutter</span>
+        <span class="chip">React Native</span>
+        <span class="chip">ASP.NET Core</span>
+        <span class="chip">PostgreSQL</span>
+        <span class="chip">CQRS / MediatR</span>
+        <span class="chip">Clean Architecture</span>
+        <span class="chip">CI/CD</span>
+        <span class="chip">Firebase</span>
+        <span class="chip">SignalR</span>
+        <span class="chip">Supabase</span>
+      </div>
     </section>
 
-    <footer class="reveal">© 2025</footer>
-
-    <script>
-      // ====== Conteúdos ======
-      const SKILLS = [
-        "C#",
-        ".NET 8",
-        ".NET MAUI",
-        "XAML",
-        "MVVM",
-        "ASP.NET Core",
-        "Entity Framework",
-        "SignalR",
-        "Azure DevOps",
-        "TypeScript",
-        "Node.js",
-        "React",
-        "React Native",
-        "GraphQL",
-        "REST APIs",
-        "Jest",
-        "Cypress",
-        "SQL Server",
-        "PostgreSQL",
-        "MongoDB",
-        "Firebase",
-        "SEO Técnico",
-        "SSR",
-        "Strapi",
-        "WordPress Headless",
-        "Supabase",
-        "LLMs",
-        "Expo Router",
-      ];
-      const PROJECTS = [
-        {
-          title: "Onet Vision",
-          desc: "App enterprise de limpeza com reconhecimento facial, push, realtime (SignalR) e CI/CD (Azure DevOps). Feito em .NET MAUI + ASP.NET Core.",
-          tags: [
-            ".NET MAUI",
-            "ASP.NET Core",
-            ".NET 8",
-            "Azure",
-            "SignalR",
-            "Firebase",
-          ],
-          images: ["onetvision1.jpeg", "onetvision2.jpeg"],
-        },
-        {
-          title: "Pesados Online",
-          desc: "Aplicativo para compra/cadastro de máquinas pesadas. Correções, UX, regras de negócio e manutenção de legado. .NET MAUI.",
-          tags: [".NET MAUI", "UX", "Refactor"],
-          images: ["pesados1.jpeg", "pesados2.jpeg"],
-        },
-        {
-          title: "SAB Cliente & Técnico",
-          desc: "Relatórios de atendimento com foco em estabilidade no iOS, UI refinada e publicação na App Store.",
-          tags: [".NET MAUI", "iOS", "Publicação"],
-          images: ["sab1.jpeg", "sab2.jpeg"],
-        },
-        {
-          title: "DigitalCheckList – Onet",
-          desc: "Sustentação do sistema web em ASP.NET Core MVC .NET 8. Melhorias visuais, correções e evolução de features.",
-          tags: ["ASP.NET Core MVC", ".NET 8", "Web"],
-          images: ["sitedigitalchecklist1.png", "sitedigitalchecklist2.png"],
-        },
-      ];
-
-      // ====== Render Skills ======
-      const skillEl = document.getElementById("skills");
-      SKILLS.forEach((s, i) => {
-        const chip = document.createElement("span");
-        chip.className = "chip";
-        chip.style.animationDelay = i * 35 + "ms";
-        chip.innerHTML = `<span class="dot"></span>${s}`;
-        skillEl.appendChild(chip);
-      });
-
-      // ====== Render Projetos com carrossel ======
-      const projectsEl = document.getElementById("projects");
-      PROJECTS.forEach((p) => {
-        const card = document.createElement("article");
-        card.className = "card";
-        const media = document.createElement("div");
-        media.className = "project-media";
-        p.images.forEach((src, i) => {
-          const img = document.createElement("img");
-          img.src = src;
-          img.alt = `${p.title} imagem ${i + 1}`;
-          if (i === 0) img.classList.add("active");
-          media.appendChild(img);
-        });
-        const h3 = document.createElement("h3");
-        h3.textContent = p.title;
-        const d = document.createElement("p");
-        d.textContent = p.desc;
-        const tags = document.createElement("div");
-        tags.className = "project-tags";
-        p.tags.forEach((t) => {
-          const tag = document.createElement("span");
-          tag.className = "tag";
-          tag.textContent = t;
-          tags.appendChild(tag);
-        });
-        card.append(media, h3, d, tags);
-        projectsEl.appendChild(card);
-
-        const imgs = Array.from(media.querySelectorAll("img"));
-        let i = 0;
-        let timer = null;
-        const play = () =>
-          (timer = setInterval(() => {
-            imgs[i].classList.remove("active");
-            i = (i + 1) % imgs.length;
-            imgs[i].classList.add("active");
-          }, 2800));
-        const pause = () => timer && clearInterval(timer);
-        media.addEventListener("mouseenter", pause);
-        media.addEventListener("mouseleave", () => {
-          pause();
-          play();
-        });
-        if (imgs.length > 1) play();
-      });
-
-      // ====== Reveal on scroll ======
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting || e.intersectionRatio > 0) {
-              e.target.classList.add("show");
-              io.unobserve(e.target);
-            }
-          });
-        },
-        { threshold: 0.05, rootMargin: "80px 0px" }
-      );
-      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
-    </script>
-  </body>
+    <section>
+      <h2>Formação</h2>
+      <div class="xp-block">
+        <div class="xp-role">ADS — UNIP</div>
+        <div class="xp-company">Análise e Desenvolvimento de Sistemas</div>
+        <div class="xp-dates">Concluído</div>
+      </div>
+    </section>
+  </div>
+</body>
 </html>

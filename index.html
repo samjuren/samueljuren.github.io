@@ -382,13 +382,17 @@
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
+      // GERA O PDF
       html2pdf().set(opt).from(element).output('blob').then((blob) => {
         
         const file = new File([blob], opt.filename, { type: 'application/pdf' });
+        
+        // 1. Verifica se o navegador suporta compartilhamento
+        // 2. Verifica se o User Agent é de celular (Android ou iOS)
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-        // AQUI ESTÁ A MÁGICA:
-        // Verifica se o navegador consegue compartilhar arquivos (Celular geralmente consegue)
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        if (isMobile && navigator.canShare && navigator.canShare({ files: [file] })) {
+          // Comportamento MOBILE: Compartilhar
           navigator.share({
             files: [file],
             title: 'Currículo - Samuel Costa',
@@ -396,11 +400,11 @@
           })
           .catch((err) => console.log('Compartilhamento cancelado', err))
           .finally(() => {
-             btn.style.display = 'inline-flex'; // Volta o botão
+             btn.style.display = 'inline-flex'; 
           });
 
         } else {
-          // Se for PC (ou não suportar compartilhar), ele faz o download tradicional
+          // Comportamento PC/MAC: Download direto
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.href = url;
@@ -410,7 +414,7 @@
           document.body.removeChild(a);
           URL.revokeObjectURL(url);
           
-          btn.style.display = 'inline-flex'; // Volta o botão
+          btn.style.display = 'inline-flex';
         }
       });
     }

@@ -129,7 +129,7 @@
       margin-left: 12px;
     }
 
-    /* BLOCOS */
+    /* BLOCOS DE EXPERIÊNCIA */
     .xp-block {
       margin-bottom: 20px;
       page-break-inside: avoid; 
@@ -197,7 +197,7 @@
       .xp-dates { font-size: 12px; align-self: flex-start; }
       h1 { font-size: 22px; }
       
-      /* Muda o texto do botão no mobile para indicar compartilhar */
+      /* No celular, muda o texto do botão para "Compartilhar" */
       .btn-download span { display: none; }
       .btn-download::after { content: 'Compartilhar PDF'; }
     }
@@ -372,7 +372,6 @@
       const element = document.getElementById('curriculo-content');
       const btn = document.querySelector('.btn-download');
       
-      // Esconde o botão durante a geração
       btn.style.display = 'none';
 
       const opt = {
@@ -383,27 +382,25 @@
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
-      // GERA O PDF COMO UM BLOB (Arquivo na memória)
       html2pdf().set(opt).from(element).output('blob').then((blob) => {
         
-        // Cria um arquivo virtual pronto para ser compartilhado
         const file = new File([blob], opt.filename, { type: 'application/pdf' });
 
-        // VERIFICA SE O NAVEGADOR SUPORTA COMPARTILHAMENTO (Geralmente Mobile)
+        // AQUI ESTÁ A MÁGICA:
+        // Verifica se o navegador consegue compartilhar arquivos (Celular geralmente consegue)
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           navigator.share({
             files: [file],
             title: 'Currículo - Samuel Costa',
             text: 'Olá, segue em anexo meu currículo atualizado.'
           })
-          .then(() => console.log('Compartilhado!'))
-          .catch((err) => console.error('Erro ou cancelado:', err))
+          .catch((err) => console.log('Compartilhamento cancelado', err))
           .finally(() => {
-            btn.style.display = 'inline-flex'; // Mostra o botão de volta
+             btn.style.display = 'inline-flex'; // Volta o botão
           });
 
         } else {
-          // FALLBACK: Se for PC ou navegador antigo, força o download clássico
+          // Se for PC (ou não suportar compartilhar), ele faz o download tradicional
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.href = url;
@@ -413,7 +410,7 @@
           document.body.removeChild(a);
           URL.revokeObjectURL(url);
           
-          btn.style.display = 'inline-flex'; // Mostra o botão de volta
+          btn.style.display = 'inline-flex'; // Volta o botão
         }
       });
     }

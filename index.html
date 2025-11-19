@@ -44,6 +44,7 @@
       padding: 40px 50px;
       border-radius: 8px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      position: relative; /* Importante para o PDF */
     }
     
     /* HEADER */
@@ -129,7 +130,7 @@
       margin-left: 12px;
     }
 
-    /* BLOCOS DE EXPERIÊNCIA */
+    /* BLOCOS */
     .xp-block {
       margin-bottom: 20px;
       page-break-inside: avoid; 
@@ -187,7 +188,7 @@
       font-weight: 500;
     }
 
-    /* RESPONSIVIDADE MOBILE */
+    /* === RESPONSIVIDADE VISUAL (Só pra ver na tela do celular) === */
     @media (max-width: 640px) {
       body { padding: 10px; display: block; }
       .page { padding: 24px 20px; width: 100%; max-width: 100%; }
@@ -197,9 +198,34 @@
       .xp-dates { font-size: 12px; align-self: flex-start; }
       h1 { font-size: 22px; }
       
-      /* No celular, muda o texto do botão para "Compartilhar" */
       .btn-download span { display: none; }
       .btn-download::after { content: 'Compartilhar PDF'; }
+    }
+
+    /* === MÁGICA DO PDF: CLASSE PARA FORÇAR LAYOUT DE DESKTOP === */
+    /* Essa classe é ativada pelo JS apenas durante a geração do PDF */
+    .print-mode {
+      width: 794px !important;
+      max-width: 794px !important;
+      min-width: 794px !important;
+      padding: 40px 50px !important;
+      margin: 0 !important;
+    }
+    
+    .print-mode header {
+      flex-direction: row !important;
+      align-items: flex-start !important;
+      text-align: left !important;
+    }
+    
+    .print-mode .contacts {
+      text-align: right !important;
+      margin-top: 0 !important;
+    }
+    
+    .print-mode .xp-header {
+      flex-direction: row !important;
+      align-items: baseline !important;
     }
 
     @media print {
@@ -372,7 +398,15 @@
       const element = document.getElementById('curriculo-content');
       const btn = document.querySelector('.btn-download');
       
+      // 1. Esconde botão
       btn.style.display = 'none';
+      
+      // 2. FORÇA O LAYOUT DE DESKTOP NO CELULAR
+      // Adiciona classe que fixa a largura em 794px e reorganiza flexbox
+      element.classList.add('print-mode');
+      
+      // Oculta overflow do body pra não ficar scroll estranho na tela enquanto gera
+      document.body.style.overflowX = 'hidden';
 
       const opt = {
         margin: 0, 
@@ -382,29 +416,27 @@
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
-      // GERA O PDF
       html2pdf().set(opt).from(element).output('blob').then((blob) => {
         
-        const file = new File([blob], opt.filename, { type: 'application/pdf' });
+        // 3. REMOVE O LAYOUT FORÇADO (Volta a ficar bonito no celular)
+        element.classList.remove('print-mode');
+        document.body.style.overflowX = '';
         
-        // 1. Verifica se o navegador suporta compartilhamento
-        // 2. Verifica se o User Agent é de celular (Android ou iOS)
+        const file = new File([blob], opt.filename, { type: 'application/pdf' });
+
+        // Verifica se é dispositivo mobile (Android/iOS) + Se o navegador suporta share
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
         if (isMobile && navigator.canShare && navigator.canShare({ files: [file] })) {
-          // Comportamento MOBILE: Compartilhar
           navigator.share({
             files: [file],
             title: 'Currículo - Samuel Costa',
             text: 'Olá, segue em anexo meu currículo atualizado.'
           })
-          .catch((err) => console.log('Compartilhamento cancelado', err))
-          .finally(() => {
-             btn.style.display = 'inline-flex'; 
-          });
-
+          .catch((err) => console.log('Cancelado', err))
+          .finally(() => btn.style.display = 'inline-flex');
         } else {
-          // Comportamento PC/MAC: Download direto
+          // PC ou Mac
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.href = url;
@@ -413,7 +445,6 @@
           a.click();
           document.body.removeChild(a);
           URL.revokeObjectURL(url);
-          
           btn.style.display = 'inline-flex';
         }
       });

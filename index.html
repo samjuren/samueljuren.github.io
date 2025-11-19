@@ -1,3 +1,13 @@
+Sim, é **super possível** e fica muito profissional\!
+
+Para isso, usamos a **Web Share API** do navegador. A lógica que vou implementar funciona assim:
+
+1.  **No Celular (Android/iOS):** Quando o PDF terminar de gerar, em vez de baixar direto, ele **abre a janelinha nativa de compartilhamento** (onde aparece WhatsApp, Telegram, E-mail, AirDrop, etc).
+2.  **No Computador:** Como computadores geralmente não têm essa janelinha de "compartilhar arquivo", ele detecta isso automaticamente e faz o **download normal**.
+
+Aqui está o código completo atualizado com essa funcionalidade "inteligente":
+
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -19,7 +29,7 @@
       --bg-body: #f8f9fa; 
       --bg-paper: #ffffff;
       --border: #e2e8f0;
-      --bg-highlight: #f1f5f9; /* Cor de destaque (datas e chips) */
+      --bg-highlight: #f1f5f9; 
     }
 
     * { box-sizing: border-box; }
@@ -76,6 +86,7 @@
       text-align: right;
       font-size: 14px;
       color: var(--text-light);
+      min-width: 200px;
     }
     .contacts div { margin-bottom: 4px; }
     .contacts a {
@@ -128,7 +139,7 @@
       margin-left: 12px;
     }
 
-    /* BLOCOS DE EXPERIÊNCIA / FORMAÇÃO */
+    /* BLOCOS */
     .xp-block {
       margin-bottom: 20px;
       page-break-inside: avoid; 
@@ -137,8 +148,9 @@
     .xp-header {
       display: flex;
       justify-content: space-between;
-      align-items: baseline; /* Alinha pela base do texto */
+      align-items: baseline; 
       margin-bottom: 4px;
+      gap: 10px; 
     }
     
     .xp-role {
@@ -148,19 +160,18 @@
     }
     
     .xp-company {
-      display: block; /* Garante que fique em linha nova ou bloco separado se precisar */
+      display: block; 
       font-size: 15px;
       font-weight: 500;
       color: var(--text-light);
       margin-top: 2px;
     }
     
-    /* DATAS */
     .xp-dates {
       font-size: 13px;
       font-weight: 600;
-      color: var(--text-main); /* Texto um pouco mais escuro para leitura */
-      background: var(--bg-highlight); /* Fundo cinza claro */
+      color: var(--text-main); 
+      background: var(--bg-highlight); 
       padding: 4px 10px;
       border-radius: 4px;
       white-space: nowrap;
@@ -173,25 +184,38 @@
       margin-top: 8px;
     }
 
-    /* CHIPS (HABILIDADES) */
+    /* CHIPS */
     .chips { display: flex; flex-wrap: wrap; gap: 8px; }
     
     .chip {
-      background: var(--bg-highlight); /* Mesmo fundo das datas */
-      border: 1px solid var(--border); /* Borda sutil para definição */
+      background: var(--bg-highlight); 
+      border: 1px solid var(--border); 
       color: var(--primary);
       padding: 6px 14px;
-      border-radius: 6px; /* Cantos levemente arredondados (menos pílula, mais técnico) */
+      border-radius: 6px; 
       font-size: 14px;
       font-weight: 500;
-      /* Sombra removida para ficar mais "flat" e limpo como as datas */
+    }
+
+    /* RESPONSIVIDADE MOBILE */
+    @media (max-width: 640px) {
+      body { padding: 10px; display: block; }
+      .page { padding: 24px 20px; width: 100%; max-width: 100%; }
+      header { flex-direction: column; align-items: center; text-align: center; gap: 15px; }
+      .contacts { text-align: center; margin-top: 0; }
+      .xp-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .xp-dates { font-size: 12px; align-self: flex-start; }
+      h1 { font-size: 22px; }
+      
+      /* Muda o texto do botão no mobile para indicar compartilhar */
+      .btn-download span { display: none; }
+      .btn-download::after { content: 'Compartilhar PDF'; }
     }
 
     @media print {
       body { background: none; padding: 0; }
       .page { box-shadow: none; margin: 0; width: 100%; max-width: 100%; padding: 0; border-radius: 0; }
       .no-print { display: none !important; }
-      /* Força a impressão do fundo cinza (browsers tendem a remover backgrounds) */
       .xp-dates, .chip { 
         background-color: #f1f5f9 !important; 
         -webkit-print-color-adjust: exact; 
@@ -209,9 +233,9 @@
         <h1>Samuel Simões Juren da Costa</h1>
         <div class="role">Engenheiro de Software e Especialista Mobile Multiplataforma</div>
         
-        <button class="btn-download no-print" onclick="downloadPDF()">
+        <button class="btn-download no-print" onclick="handlePDF()">
           <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-          Baixar PDF
+          <span>Baixar PDF</span>
         </button>
       </div>
       
@@ -354,28 +378,56 @@
   </div>
 
   <script>
-    function downloadPDF() {
+    function handlePDF() {
       const element = document.getElementById('curriculo-content');
       const btn = document.querySelector('.btn-download');
       
+      // Esconde o botão durante a geração
       btn.style.display = 'none';
 
       const opt = {
-        margin:       0, 
-        filename:     'Curriculo-Samuel-Costa.pdf',
-        image:        { type: 'jpeg', quality: 1 },
-        html2canvas:  { 
-          scale: 2, 
-          useCORS: true,
-          scrollY: 0
-        },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        margin: 0, 
+        filename: 'Curriculo-Samuel-Costa.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
-      html2pdf().set(opt).from(element).save().then(() => {
-        btn.style.display = 'inline-flex';
+      // GERA O PDF COMO UM BLOB (Arquivo na memória)
+      html2pdf().set(opt).from(element).output('blob').then((blob) => {
+        
+        // Cria um arquivo virtual pronto para ser compartilhado
+        const file = new File([blob], opt.filename, { type: 'application/pdf' });
+
+        // VERIFICA SE O NAVEGADOR SUPORTA COMPARTILHAMENTO (Geralmente Mobile)
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          navigator.share({
+            files: [file],
+            title: 'Currículo - Samuel Costa',
+            text: 'Olá, segue em anexo meu currículo atualizado.'
+          })
+          .then(() => console.log('Compartilhado!'))
+          .catch((err) => console.error('Erro ou cancelado:', err))
+          .finally(() => {
+            btn.style.display = 'inline-flex'; // Mostra o botão de volta
+          });
+
+        } else {
+          // FALLBACK: Se for PC ou navegador antigo, força o download clássico
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = opt.filename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          
+          btn.style.display = 'inline-flex'; // Mostra o botão de volta
+        }
       });
     }
   </script>
 </body>
 </html>
+```

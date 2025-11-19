@@ -14,27 +14,53 @@
       color:var(--text); background:#fff;
     }
     .page{max-width:820px;margin:0 auto}
+    
     header{display:flex;justify-content:space-between;gap:24px;align-items:flex-start}
-    h1{font-size:28px;line-height:1.2;margin:0 0 6px}
-    .role{font-weight:600;color:var(--muted)}
-    .contacts{font-size:14px;color:var(--muted)}
-    .contacts a{color:inherit;text-decoration:none}
-    hr{border:0;border-top:1px solid var(--line);margin:16px 0}
-    section{margin:16px 0}
-    h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+    h1{font-size:28px;line-height:1.2;margin:0 0 6px;color:#000;}
+    .role{font-weight:600;color:var(--muted);font-size:16px;}
+    
+    .contacts{font-size:14px;color:var(--muted);line-height:1.5;}
+    .contacts a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--line);}
+    
+    hr{border:0;border-top:1px solid var(--line);margin:24px 0}
+    section{margin:24px 0}
 
-    /* Experiência no formato simples */
-    .xp-block{padding:10px 0;border-bottom:1px solid var(--line)}
+    /* ESTILO DOS TÍTULOS */
+    h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #000;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 2px solid #111;
+      padding-bottom: 8px;
+      margin: 0 0 16px 0;
+    }
+
+    /* Experiência */
+    .xp-block{padding:12px 0;border-bottom:1px solid var(--line)}
     .xp-block:last-child{border-bottom:0}
-    .xp-role{font-weight:700}
-    .xp-company,.xp-dates,.xp-location{color:var(--muted)}
-    .xp-desc{margin-top:6px;font-size:14px;color:var(--text);line-height:1.5}
+    .xp-header{display:flex;justify-content:space-between;flex-wrap:wrap;margin-bottom:4px;}
+    .xp-role{font-weight:700;font-size:15px;color:#000;}
+    .xp-company{font-weight:600;color:var(--muted);}
+    .xp-dates{font-size:14px;color:var(--muted);white-space:nowrap;}
+    .xp-desc{margin-top:6px;font-size:14px;color:var(--text);line-height:1.6;text-align:justify;}
 
     .chips{display:flex;flex-wrap:wrap;gap:8px}
-    .chip{border:1px solid var(--line);padding:4px 8px;border-radius:999px;font-size:13px}
+    .chip{
+      background:#f3f4f6; 
+      border:1px solid #e5e7eb;
+      color:#374151;
+      padding:4px 10px;
+      border-radius:6px;
+      font-size:13px;
+      font-weight:500;
+    }
+    
     @media print{
       body{padding:0}
       a{text-decoration:none;color:var(--text)}
+      .chip{border:1px solid #ccc}
     }
   </style>
 </head>
@@ -43,79 +69,125 @@
     <header>
       <div>
         <h1>Samuel Simões Juren da Costa</h1>
-        <div class="role">Engenheiro de Software</div>
+        <div class="role">Desenvolvedor Mobile & Full Stack</div>
       </div>
       <div class="contacts" style="text-align:right">
-        <div><a href="mailto:samuel@email.com">samuel@email.com</a></div>
-        <div>(11) 99999-0000 • São Paulo, SP</div>
-        <div><a href="https://github.com/seu-github" target="_blank" rel="noreferrer">github.com/seu-github</a></div>
-        <div><a href="https://www.linkedin.com/in/seu-linkedin" target="_blank" rel="noreferrer">linkedin.com/in/seu-linkedin</a></div>
+        <div><a href="mailto:sammjureen@outlook.com">sammjureen@outlook.com</a></div>
+        <div>(11) 99542.2920 • São Paulo, SP</div>
+        <div>Rua Doutor Edmundo Bittencourt, 239</div>
+        <div>Jardim São José</div>
       </div>
     </header>
 
     <hr/>
 
     <section>
-      <h2>Resumo</h2>
-      <p>Desenvolvedor Mobile & Full Stack com foco em qualidade de código, UX e entrega de valor. Experiência com .NET MAUI, Flutter, React Native e APIs em ASP.NET Core (CQRS/Clean). Publicação em lojas, integrações REST, Firebase/SignalR, CI/CD.</p>
+      <h2>Objetivo</h2>
+      <p style="text-align:justify;">
+        Desenvolvedor Mobile & Full Stack especializado em .NET MAUI e Flutter, com histórico de entregas para
+        grandes clientes como GRU Airport e Hospital das Clínicas. Experiência sólida em Clean Architecture
+        (DDD/MVVM), integração de IA Generativa (LLMs) e serviços Cloud (Azure/Firebase).
+        Foco em performance, UI/UX refinada e código escalável.
+      </p>
     </section>
 
     <section>
       <h2>Experiência</h2>
 
       <div class="xp-block">
-        <div class="xp-role">CEO</div>
-        <div class="xp-company">Ordem Simples — Autônomo</div>
-        <div class="xp-dates">Agosto de 2025 — Atual</div>
-        <div class="xp-location">São Paulo, Brasil</div>
-        <p class="xp-desc">
-          Fundador e responsável técnico pela plataforma de gestão inteligente <strong>Ordem Simples</strong>, desenvolvida em <strong>Flutter</strong> com backend no <strong>Supabase</strong>. Atuação em todas as etapas do produto — concepção, design, arquitetura, desenvolvimento, testes e publicação.
-          Liderança técnica, planejamento de roadmap, priorização de features e foco em performance e experiência do usuário.
-        </p>
+        <div class="xp-header">
+          <div>
+            <div class="xp-role">Desenvolvedor Mobile Multiplataforma (Flutter e IA)</div>
+            <div class="xp-company">2Future</div>
+          </div>
+          <div class="xp-dates">Ago 2025 - Atual</div>
+        </div>
+        <div class="xp-desc">
+          • Desenvolvimento Full Stack com foco em Flutter e React Native, aplicando Clean Architecture, DDD e MVVM.<br>
+          • Criação de backends escaláveis em GoLang e Node.js (crawlers/automações) integrados a PostgreSQL e Supabase.<br>
+          • Implementação de interfaces conversacionais inteligentes utilizando LLMs para captura e personalização de dados.
+        </div>
       </div>
 
       <div class="xp-block">
-        <div class="xp-role">Engenheiro Mobile</div>
-        <div class="xp-company">Projetos .NET MAUI & React Native — Freelancer</div>
-        <div class="xp-dates">2023 — Atual</div>
-        <div class="xp-location">São Paulo, Brasil (Remoto/Híbrido)</div>
-        <p class="xp-desc">
-          Desenvolvimento de aplicativos multiplataforma com <strong>.NET MAUI</strong> e <strong>React Native</strong>, aplicando padrões de arquitetura limpa (<strong>MVVM</strong> e <strong>DDD</strong>). 
-          Responsável por integrações com APIs REST, autenticação JWT, push notifications, deep links e publicações em App Store e Google Play.
-        </p>
+        <div class="xp-header">
+          <div>
+            <div class="xp-role">Engenheiro de Software .NET</div>
+            <div class="xp-company">VSGeek</div>
+          </div>
+          <div class="xp-dates">Jun 2025 - Nov 2025</div>
+        </div>
+        <div class="xp-desc">
+          • Desenvolvimento mobile com .NET MAUI, liderando a migração do .NET 6 para .NET 9 (Android/iOS).<br>
+          • Construção de APIs robustas em ASP.NET Core com PostgreSQL, focando em Injeção de Dependência e Pattern Repository.<br>
+          • Estruturação de arquitetura em camadas visando alta manutenibilidade.
+        </div>
       </div>
 
       <div class="xp-block">
-        <div class="xp-role">Desenvolvedor Backend</div>
-        <div class="xp-company">APIs ASP.NET Core — Freelancer</div>
-        <div class="xp-dates">2022 — Atual</div>
-        <div class="xp-location">Brasil</div>
-        <p class="xp-desc">
-          Criação e manutenção de APIs escaláveis em <strong>ASP.NET Core</strong>, utilizando <strong>CQRS</strong>, <strong>MediatR</strong> e <strong>Entity Framework Core</strong>.
-          Implementação de autenticação e autorização via JWT, versionamento de endpoints, documentação com Swagger e pipelines de CI/CD com GitHub Actions e Docker.
-        </p>
+        <div class="xp-header">
+          <div>
+            <div class="xp-role">Desenvolvedor Full Stack (foco em Mobile .NET MAUI)</div>
+            <div class="xp-company">ONET Brasil</div>
+          </div>
+          <div class="xp-dates">Jun 2024 - Ago 2025</div>
+        </div>
+        <div class="xp-desc">
+          • Modernização de apps de missão crítica para grandes clientes (Aeroportos/Hospitais), focado em performance e UI.<br>
+          • Integração de IA (Reconhecimento Facial Azure) e Push Notifications (Firebase).<br>
+          • Gestão de ciclo de vida via Azure DevOps e manutenção de APIs .NET Core/Swagger.
+        </div>
+      </div>
+
+      <div class="xp-block">
+        <div class="xp-header">
+          <div>
+            <div class="xp-role">Desenvolvedor .NET Junior</div>
+            <div class="xp-company">Input Center</div>
+          </div>
+          <div class="xp-dates">Fev 2024 - Jul 2024</div>
+        </div>
+        <div class="xp-desc">
+          • Migração de legado Xamarin.Forms para .NET MAUI e publicação nas lojas (App Store/Google Play).<br>
+          • Desenvolvimento Full Stack (.NET Core, SQL Server e Web) e criação de automações de banco de dados.<br>
+          • Onboarding técnico de novos desenvolvedores através de portais internos.
+        </div>
+      </div>
+
+      <div class="xp-block">
+        <div class="xp-header">
+          <div>
+            <div class="xp-role">Desenvolvedor .NET Trainee</div>
+            <div class="xp-company">Input Center</div>
+          </div>
+          <div class="xp-dates">Mar 2023 - Fev 2024</div>
+        </div>
+        <div class="xp-desc">
+          • Sustentação de apps Xamarin.Forms e desenvolvimento web (MVC/Web Forms).<br>
+          • Otimização de performance em SQL Server (Queries/Procedures) e criação de APIs REST com Swagger.
+        </div>
       </div>
     </section>
 
     <section>
-      <h2>Projetos</h2>
+      <h2>Formação</h2>
       <div class="xp-block">
-        <div class="xp-role">TwoBetter (Mobile)</div>
-        <div class="xp-company">Flutter — Arquitetura Limpa</div>
-        <div class="xp-dates">2025</div>
-        <div class="xp-location">App com jornadas guiadas e métricas</div>
-        <p class="xp-desc">
-          Aplicativo de formação pessoal com jornadas, conteúdos interativos e acompanhamento de progresso. Desenvolvimento em Flutter com state management modular e integração a serviços de IA.
-        </p>
+        <div class="xp-header">
+          <div>
+            <div class="xp-role">MBA em Engenharia de Software</div>
+            <div class="xp-company">UNOPAR - Universidade Norte do Paraná</div>
+          </div>
+          <div class="xp-dates">Jul 2025 - Maio 2026</div>
+        </div>
       </div>
-      <div class="xp-block">
-        <div class="xp-role">POC ML Kit Face Detection</div>
-        <div class="xp-company">.NET MAUI • CameraX (Android)</div>
-        <div class="xp-dates">2025</div>
-        <div class="xp-location">Detecção facial para segurança/acesso</div>
-        <p class="xp-desc">
-          Prova de conceito integrando o <strong>Google ML Kit</strong> e <strong>CameraX</strong> em um app .NET MAUI. Implementação de detecção facial em tempo real, otimização de desempenho e compatibilidade com Android e iOS.
-        </p>
+      <div class="xp-block" style="border:0;">
+        <div class="xp-header">
+          <div>
+            <div class="xp-role">CST em Análise e Desenvolvimento de Sistemas</div>
+            <div class="xp-company">Universidade Paulista (UNIP)</div>
+          </div>
+          <div class="xp-dates">Jul 2022 - Jul 2025</div>
+        </div>
       </div>
     </section>
 
@@ -125,23 +197,17 @@
         <span class="chip">.NET MAUI</span>
         <span class="chip">Flutter</span>
         <span class="chip">React Native</span>
-        <span class="chip">ASP.NET Core</span>
-        <span class="chip">PostgreSQL</span>
-        <span class="chip">CQRS / MediatR</span>
         <span class="chip">Clean Architecture</span>
-        <span class="chip">CI/CD</span>
+        <span class="chip">DDD / MVVM</span>
+        <span class="chip">IA Generativa (LLMs)</span>
+        <span class="chip">Azure</span>
         <span class="chip">Firebase</span>
-        <span class="chip">SignalR</span>
+        <span class="chip">GoLang</span>
+        <span class="chip">Node.js</span>
+        <span class="chip">PostgreSQL</span>
         <span class="chip">Supabase</span>
-      </div>
-    </section>
-
-    <section>
-      <h2>Formação</h2>
-      <div class="xp-block">
-        <div class="xp-role">ADS — UNIP</div>
-        <div class="xp-company">Análise e Desenvolvimento de Sistemas</div>
-        <div class="xp-dates">Concluído</div>
+        <span class="chip">ASP.NET Core</span>
+        <span class="chip">SQL Server</span>
       </div>
     </section>
   </div>
